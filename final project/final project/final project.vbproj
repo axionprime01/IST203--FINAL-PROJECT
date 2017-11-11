@@ -116,6 +116,9 @@
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+    <EmbeddedResource Include="PickPokemonForm.resx">
+      <DependentUpon>PickPokemonForm.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ViewTeamForm.resx">
       <DependentUpon>ViewTeamForm.vb</DependentUpon>
     </EmbeddedResource>
