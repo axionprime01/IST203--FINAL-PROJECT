@@ -1,1 +1,14 @@
 D:\IST203 githubsourcetree stuff\GITHUB projects\FINAL PROJECT\final project\final project\bin\Debug\final project.exe.config
+D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final project\final project\bin\Debug\final project.exe.config
+D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final project\final project\bin\Debug\final project.exe
+D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final project\final project\bin\Debug\final project.pdb
+D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final project\final project\bin\Debug\final project.xml
+D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final project\final project\obj\Debug\final project.vbprojResolveAssemblyReference.cache
+D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final project\final project\obj\Debug\final_project.MainForm.resources
+D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final project\final project\obj\Debug\final_project.Resources.resources
+D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final project\final project\obj\Debug\final_project.PickPokemonForm.resources
+D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final project\final project\obj\Debug\final_project.ViewTeamForm.resources
+D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final project\final project\obj\Debug\final project.vbproj.GenerateResource.Cache
+D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final project\final project\obj\Debug\final project.exe
+D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final project\final project\obj\Debug\final project.xml
+D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final project\final project\obj\Debug\final project.pdb

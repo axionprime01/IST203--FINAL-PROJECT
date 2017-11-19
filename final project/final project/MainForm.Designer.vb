@@ -25,10 +25,10 @@ Partial Class MainForm
         Me.Label1 = New System.Windows.Forms.Label()
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip()
         Me.PokemonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.LookForAPokemonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TeamsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CreateTeamToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewSavedTeamsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.LookForAPokemonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -60,6 +60,12 @@ Partial Class MainForm
         Me.PokemonToolStripMenuItem.Size = New System.Drawing.Size(82, 24)
         Me.PokemonToolStripMenuItem.Text = "Pokemon"
         '
+        'LookForAPokemonToolStripMenuItem
+        '
+        Me.LookForAPokemonToolStripMenuItem.Name = "LookForAPokemonToolStripMenuItem"
+        Me.LookForAPokemonToolStripMenuItem.Size = New System.Drawing.Size(218, 26)
+        Me.LookForAPokemonToolStripMenuItem.Text = "Look For a Pokemon"
+        '
         'TeamsToolStripMenuItem
         '
         Me.TeamsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CreateTeamToolStripMenuItem, Me.ViewSavedTeamsToolStripMenuItem})
@@ -78,12 +84,6 @@ Partial Class MainForm
         Me.ViewSavedTeamsToolStripMenuItem.Name = "ViewSavedTeamsToolStripMenuItem"
         Me.ViewSavedTeamsToolStripMenuItem.Size = New System.Drawing.Size(202, 26)
         Me.ViewSavedTeamsToolStripMenuItem.Text = "view Saved teams"
-        '
-        'LookForAPokemonToolStripMenuItem
-        '
-        Me.LookForAPokemonToolStripMenuItem.Name = "LookForAPokemonToolStripMenuItem"
-        Me.LookForAPokemonToolStripMenuItem.Size = New System.Drawing.Size(218, 26)
-        Me.LookForAPokemonToolStripMenuItem.Text = "Look For a Pokemon"
         '
         'MainForm
         '

@@ -99,6 +99,7 @@
     <Compile Include="PickPokemonForm.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Pokemon.vb" />
     <Compile Include="ViewTeamForm.Designer.vb">
       <DependentUpon>ViewTeamForm.vb</DependentUpon>
     </Compile>

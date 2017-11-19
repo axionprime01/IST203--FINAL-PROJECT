@@ -22,19 +22,9 @@ Partial Class PickPokemonForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
         Me.Button1 = New System.Windows.Forms.Button()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.lstboxPokemon = New System.Windows.Forms.ListBox()
         Me.SuspendLayout()
-        '
-        'DataGridView1
-        '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(0, 0)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowTemplate.Height = 24
-        Me.DataGridView1.Size = New System.Drawing.Size(745, 396)
-        Me.DataGridView1.TabIndex = 0
         '
         'Button1
         '
@@ -45,20 +35,27 @@ Partial Class PickPokemonForm
         Me.Button1.Text = "Cancel"
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'lstboxPokemon
+        '
+        Me.lstboxPokemon.FormattingEnabled = True
+        Me.lstboxPokemon.ItemHeight = 16
+        Me.lstboxPokemon.Location = New System.Drawing.Point(6, 12)
+        Me.lstboxPokemon.Name = "lstboxPokemon"
+        Me.lstboxPokemon.Size = New System.Drawing.Size(734, 372)
+        Me.lstboxPokemon.TabIndex = 2
+        '
         'PickPokemonForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(744, 445)
+        Me.Controls.Add(Me.lstboxPokemon)
         Me.Controls.Add(Me.Button1)
-        Me.Controls.Add(Me.DataGridView1)
         Me.Name = "PickPokemonForm"
         Me.Text = "PickPokemonForm"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
-
-    Friend WithEvents DataGridView1 As DataGridView
     Friend WithEvents Button1 As Button
+    Friend WithEvents lstboxPokemon As ListBox
 End Class
