@@ -952,30 +952,16 @@ Namespace PokemonDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@move4", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move4", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[Pokemon] SET [ID] = @ID, [name] = @name, [typing] = @typing, [abili"& _ 
-                "ty] = @ability, [move1] = @move1, [move2] = @move2, [move3] = @move3, [move4] = "& _ 
-                "@move4 WHERE (([ID] = @Original_ID) AND ([name] = @Original_name) AND ([typing] "& _ 
-                "= @Original_typing) AND ([ability] = @Original_ability) AND ([move1] = @Original"& _ 
-                "_move1) AND ([move2] = @Original_move2) AND ([move3] = @Original_move3) AND ([mo"& _ 
-                "ve4] = @Original_move4));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ID, name, typing, ability, move1, move2, move3"& _ 
-                ", move4 FROM Pokemon WHERE (ID = @ID)"
+            Me._adapter.UpdateCommand.CommandText = "UPDATE Pokemon"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET          ability = @ability, move1 = @move1, move2 = @move2, "& _ 
+                "move3 = @move3, move4 = @move4"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE  (ID = @ID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ID, name, typing, ab"& _ 
+                "ility, move1, move2, move3, move4 FROM Pokemon WHERE (ID = @ID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@typing", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typing", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ability", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ability", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@move1", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@move2", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@move3", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move3", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@move4", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move4", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "name", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_typing", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typing", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ability", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ability", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_move1", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move1", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_move2", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move2", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_move3", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move3", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_move4", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move4", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ability", Global.System.Data.SqlDbType.NVarChar, 75, Global.System.Data.ParameterDirection.Input, 0, 0, "ability", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@move1", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "move1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@move2", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "move2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@move3", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "move3", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@move4", Global.System.Data.SqlDbType.NVarChar, 50, Global.System.Data.ParameterDirection.Input, 0, 0, "move4", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ID", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
         End Sub
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -1163,95 +1149,33 @@ Namespace PokemonDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update( _
-                    ByVal ID As Integer,  _
-                    ByVal name As String,  _
-                    ByVal typing As String,  _
-                    ByVal ability As String,  _
-                    ByVal move1 As String,  _
-                    ByVal move2 As String,  _
-                    ByVal move3 As String,  _
-                    ByVal move4 As String,  _
-                    ByVal Original_ID As Integer,  _
-                    ByVal Original_name As String,  _
-                    ByVal Original_typing As String,  _
-                    ByVal Original_ability As String,  _
-                    ByVal Original_move1 As String,  _
-                    ByVal Original_move2 As String,  _
-                    ByVal Original_move3 As String,  _
-                    ByVal Original_move4 As String) As Integer
-            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(ID,Integer)
-            If (name Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("name")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(name,String)
-            End If
-            If (typing Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("typing")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(typing,String)
-            End If
+        Public Overloads Overridable Function Update(ByVal ability As String, ByVal move1 As String, ByVal move2 As String, ByVal move3 As String, ByVal move4 As String, ByVal ID As Integer) As Integer
             If (ability Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("ability")
             Else
-                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(ability,String)
+                Me.Adapter.UpdateCommand.Parameters(0).Value = CType(ability,String)
             End If
             If (move1 Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("move1")
             Else
-                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(move1,String)
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(move1,String)
             End If
             If (move2 Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("move2")
             Else
-                Me.Adapter.UpdateCommand.Parameters(5).Value = CType(move2,String)
+                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(move2,String)
             End If
             If (move3 Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("move3")
             Else
-                Me.Adapter.UpdateCommand.Parameters(6).Value = CType(move3,String)
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(move3,String)
             End If
             If (move4 Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("move4")
             Else
-                Me.Adapter.UpdateCommand.Parameters(7).Value = CType(move4,String)
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(move4,String)
             End If
-            Me.Adapter.UpdateCommand.Parameters(8).Value = CType(Original_ID,Integer)
-            If (Original_name Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_name")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Original_name,String)
-            End If
-            If (Original_typing Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_typing")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_typing,String)
-            End If
-            If (Original_ability Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_ability")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(11).Value = CType(Original_ability,String)
-            End If
-            If (Original_move1 Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_move1")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(12).Value = CType(Original_move1,String)
-            End If
-            If (Original_move2 Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_move2")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(13).Value = CType(Original_move2,String)
-            End If
-            If (Original_move3 Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_move3")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(14).Value = CType(Original_move3,String)
-            End If
-            If (Original_move4 Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_move4")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(15).Value = CType(Original_move4,String)
-            End If
+            Me.Adapter.UpdateCommand.Parameters(5).Value = CType(ID,Integer)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
             If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
@@ -1265,14 +1189,6 @@ Namespace PokemonDataSetTableAdapters
                     Me.Adapter.UpdateCommand.Connection.Close
                 End If
             End Try
-        End Function
-        
-        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
-         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
-         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal name As String, ByVal typing As String, ByVal ability As String, ByVal move1 As String, ByVal move2 As String, ByVal move3 As String, ByVal move4 As String, ByVal Original_ID As Integer, ByVal Original_name As String, ByVal Original_typing As String, ByVal Original_ability As String, ByVal Original_move1 As String, ByVal Original_move2 As String, ByVal Original_move3 As String, ByVal Original_move4 As String) As Integer
-            Return Me.Update(Original_ID, name, typing, ability, move1, move2, move3, move4, Original_ID, Original_name, Original_typing, Original_ability, Original_move1, Original_move2, Original_move3, Original_move4)
         End Function
     End Class
     
