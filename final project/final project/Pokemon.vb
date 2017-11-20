@@ -58,26 +58,25 @@ Public Class Pokemon
             Return adapter.GetData()
         End Get
     End Property
-    Public Function Update(ByVal pID As Integer,
-                           ByVal pName As String,
-                           ByVal pTyping As String,
-                           ByVal pAbility As String,
-                           ByVal pMove1 As String,
-                           ByVal pMove2 As String,
-                           ByVal pMove3 As String,
-                           ByVal pMove4 As String) As Boolean
-        'update a row into the appointments table.
-        'return true if successful. if an exception is thrown last error will hold an error message.
-        LastError = String.Empty
-        Try
-            adapter.Update()
-            adapter.Update(pID, pName, pTyping, pAbility, pMove1, pMove2, pMove3, pMove4)
-            Return True
-        Catch ex As Exception
-            LastError = ex.Message
-            Return False
-        End Try
-    End Function
+    'Public Function Update(ByVal pID As Integer,
+    '                       ByVal pName As String,
+    '                       ByVal pTyping As String,
+    '                       ByVal pAbility As String,
+    '                       ByVal pMove1 As String,
+    '                       ByVal pMove2 As String,
+    '                       ByVal pMove3 As String,
+    '                       ByVal pMove4 As String) As Boolean
+    '    'update a row into the appointments table.
+    '    'return true if successful. if an exception is thrown last error will hold an error message.
+    '    LastError = String.Empty
+    '    Try
+    '        adapter.Update(pID, pName, pTyping, pAbility, pMove1, pMove2, pMove3, pMove4)
+    '        Return True
+    '    Catch ex As Exception
+    '        LastError = ex.Message
+    '        Return False
+    '    End Try
+    'End Function
     Public Function Delete(ByVal pID As Integer,
                            ByVal pName As String,
                            ByVal pTyping As String,
@@ -89,7 +88,4 @@ Public Class Pokemon
         Dim rowsAffected As Integer = adapter.Delete(pID, pName, pTyping, pAbility, pMove1, pMove2, pMove3, pMove4)
         Return rowsAffected > 0
     End Function
-    'Public Overrides Function ToString() As String
-    '    Return ID & ", " & Name & ", " & typing & ", " & ability & ", " & move1 & ", " & move2 & ", " & move3 & ", " & move4
-    'End Function
 End Class
