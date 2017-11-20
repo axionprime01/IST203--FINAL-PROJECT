@@ -22,8 +22,23 @@ Partial Class PickPokemonForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Me.Button1 = New System.Windows.Forms.Button()
-        Me.lstboxPokemon = New System.Windows.Forms.ListBox()
+        Me.dgvPickPokemon = New System.Windows.Forms.DataGridView()
+        Me.PokemonDataSet = New final_project.PokemonDataSet()
+        Me.PokemonBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.PokemonTableAdapter = New final_project.PokemonDataSetTableAdapters.PokemonTableAdapter()
+        Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TypingDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AbilityDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Move1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Move2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Move3DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Move4DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        CType(Me.dgvPickPokemon, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PokemonDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PokemonBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Button1
@@ -35,27 +50,117 @@ Partial Class PickPokemonForm
         Me.Button1.Text = "Cancel"
         Me.Button1.UseVisualStyleBackColor = True
         '
-        'lstboxPokemon
+        'dgvPickPokemon
         '
-        Me.lstboxPokemon.FormattingEnabled = True
-        Me.lstboxPokemon.ItemHeight = 16
-        Me.lstboxPokemon.Location = New System.Drawing.Point(6, 12)
-        Me.lstboxPokemon.Name = "lstboxPokemon"
-        Me.lstboxPokemon.Size = New System.Drawing.Size(734, 372)
-        Me.lstboxPokemon.TabIndex = 2
+        Me.dgvPickPokemon.AllowUserToAddRows = False
+        Me.dgvPickPokemon.AllowUserToDeleteRows = False
+        Me.dgvPickPokemon.AutoGenerateColumns = False
+        Me.dgvPickPokemon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvPickPokemon.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn, Me.NameDataGridViewTextBoxColumn, Me.TypingDataGridViewTextBoxColumn, Me.AbilityDataGridViewTextBoxColumn, Me.Move1DataGridViewTextBoxColumn, Me.Move2DataGridViewTextBoxColumn, Me.Move3DataGridViewTextBoxColumn, Me.Move4DataGridViewTextBoxColumn})
+        Me.dgvPickPokemon.DataSource = Me.PokemonBindingSource
+        Me.dgvPickPokemon.Location = New System.Drawing.Point(3, -1)
+        Me.dgvPickPokemon.Name = "dgvPickPokemon"
+        Me.dgvPickPokemon.ReadOnly = True
+        Me.dgvPickPokemon.RowTemplate.Height = 24
+        Me.dgvPickPokemon.Size = New System.Drawing.Size(740, 397)
+        Me.dgvPickPokemon.TabIndex = 3
+        '
+        'PokemonDataSet
+        '
+        Me.PokemonDataSet.DataSetName = "PokemonDataSet"
+        Me.PokemonDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'PokemonBindingSource
+        '
+        Me.PokemonBindingSource.DataMember = "Pokemon"
+        Me.PokemonBindingSource.DataSource = Me.PokemonDataSet
+        '
+        'PokemonTableAdapter
+        '
+        Me.PokemonTableAdapter.ClearBeforeFill = True
+        '
+        'IDDataGridViewTextBoxColumn
+        '
+        Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
+        Me.IDDataGridViewTextBoxColumn.HeaderText = "ID"
+        Me.IDDataGridViewTextBoxColumn.Name = "IDDataGridViewTextBoxColumn"
+        Me.IDDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'NameDataGridViewTextBoxColumn
+        '
+        Me.NameDataGridViewTextBoxColumn.DataPropertyName = "name"
+        Me.NameDataGridViewTextBoxColumn.HeaderText = "name"
+        Me.NameDataGridViewTextBoxColumn.Name = "NameDataGridViewTextBoxColumn"
+        Me.NameDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'TypingDataGridViewTextBoxColumn
+        '
+        Me.TypingDataGridViewTextBoxColumn.DataPropertyName = "typing"
+        Me.TypingDataGridViewTextBoxColumn.HeaderText = "typing"
+        Me.TypingDataGridViewTextBoxColumn.Name = "TypingDataGridViewTextBoxColumn"
+        Me.TypingDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'AbilityDataGridViewTextBoxColumn
+        '
+        Me.AbilityDataGridViewTextBoxColumn.DataPropertyName = "ability"
+        Me.AbilityDataGridViewTextBoxColumn.HeaderText = "ability"
+        Me.AbilityDataGridViewTextBoxColumn.Name = "AbilityDataGridViewTextBoxColumn"
+        Me.AbilityDataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'Move1DataGridViewTextBoxColumn
+        '
+        Me.Move1DataGridViewTextBoxColumn.DataPropertyName = "move1"
+        Me.Move1DataGridViewTextBoxColumn.HeaderText = "move1"
+        Me.Move1DataGridViewTextBoxColumn.Name = "Move1DataGridViewTextBoxColumn"
+        Me.Move1DataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'Move2DataGridViewTextBoxColumn
+        '
+        Me.Move2DataGridViewTextBoxColumn.DataPropertyName = "move2"
+        Me.Move2DataGridViewTextBoxColumn.HeaderText = "move2"
+        Me.Move2DataGridViewTextBoxColumn.Name = "Move2DataGridViewTextBoxColumn"
+        Me.Move2DataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'Move3DataGridViewTextBoxColumn
+        '
+        Me.Move3DataGridViewTextBoxColumn.DataPropertyName = "move3"
+        Me.Move3DataGridViewTextBoxColumn.HeaderText = "move3"
+        Me.Move3DataGridViewTextBoxColumn.Name = "Move3DataGridViewTextBoxColumn"
+        Me.Move3DataGridViewTextBoxColumn.ReadOnly = True
+        '
+        'Move4DataGridViewTextBoxColumn
+        '
+        Me.Move4DataGridViewTextBoxColumn.DataPropertyName = "move4"
+        Me.Move4DataGridViewTextBoxColumn.HeaderText = "move4"
+        Me.Move4DataGridViewTextBoxColumn.Name = "Move4DataGridViewTextBoxColumn"
+        Me.Move4DataGridViewTextBoxColumn.ReadOnly = True
         '
         'PickPokemonForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(744, 445)
-        Me.Controls.Add(Me.lstboxPokemon)
+        Me.Controls.Add(Me.dgvPickPokemon)
         Me.Controls.Add(Me.Button1)
         Me.Name = "PickPokemonForm"
         Me.Text = "PickPokemonForm"
+        CType(Me.dgvPickPokemon, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PokemonDataSet, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PokemonBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
     Friend WithEvents Button1 As Button
-    Friend WithEvents lstboxPokemon As ListBox
+    Friend WithEvents dgvPickPokemon As DataGridView
+    Friend WithEvents PokemonDataSet As PokemonDataSet
+    Friend WithEvents PokemonBindingSource As BindingSource
+    Friend WithEvents PokemonTableAdapter As PokemonDataSetTableAdapters.PokemonTableAdapter
+    Friend WithEvents IDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents NameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents TypingDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents AbilityDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents Move1DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents Move2DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents Move3DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents Move4DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
 End Class
