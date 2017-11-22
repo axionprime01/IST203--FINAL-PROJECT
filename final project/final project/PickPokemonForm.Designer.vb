@@ -25,9 +25,6 @@ Partial Class PickPokemonForm
         Me.components = New System.ComponentModel.Container()
         Me.Button1 = New System.Windows.Forms.Button()
         Me.dgvPickPokemon = New System.Windows.Forms.DataGridView()
-        Me.PokemonDataSet = New final_project.PokemonDataSet()
-        Me.PokemonBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-        Me.PokemonTableAdapter = New final_project.PokemonDataSetTableAdapters.PokemonTableAdapter()
         Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.TypingDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -36,9 +33,13 @@ Partial Class PickPokemonForm
         Me.Move2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Move3DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Move4DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.PokemonBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.PokemonDataSet = New final_project.PokemonDataSet()
+        Me.PokemonTableAdapter = New final_project.PokemonDataSetTableAdapters.PokemonTableAdapter()
+        Me.btnAddPokemon = New System.Windows.Forms.Button()
         CType(Me.dgvPickPokemon, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PokemonDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PokemonBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PokemonDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'Button1
@@ -64,20 +65,6 @@ Partial Class PickPokemonForm
         Me.dgvPickPokemon.RowTemplate.Height = 24
         Me.dgvPickPokemon.Size = New System.Drawing.Size(740, 397)
         Me.dgvPickPokemon.TabIndex = 3
-        '
-        'PokemonDataSet
-        '
-        Me.PokemonDataSet.DataSetName = "PokemonDataSet"
-        Me.PokemonDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
-        '
-        'PokemonBindingSource
-        '
-        Me.PokemonBindingSource.DataMember = "Pokemon"
-        Me.PokemonBindingSource.DataSource = Me.PokemonDataSet
-        '
-        'PokemonTableAdapter
-        '
-        Me.PokemonTableAdapter.ClearBeforeFill = True
         '
         'IDDataGridViewTextBoxColumn
         '
@@ -135,18 +122,42 @@ Partial Class PickPokemonForm
         Me.Move4DataGridViewTextBoxColumn.Name = "Move4DataGridViewTextBoxColumn"
         Me.Move4DataGridViewTextBoxColumn.ReadOnly = True
         '
+        'PokemonBindingSource
+        '
+        Me.PokemonBindingSource.DataMember = "Pokemon"
+        Me.PokemonBindingSource.DataSource = Me.PokemonDataSet
+        '
+        'PokemonDataSet
+        '
+        Me.PokemonDataSet.DataSetName = "PokemonDataSet"
+        Me.PokemonDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
+        '
+        'PokemonTableAdapter
+        '
+        Me.PokemonTableAdapter.ClearBeforeFill = True
+        '
+        'btnAddPokemon
+        '
+        Me.btnAddPokemon.Location = New System.Drawing.Point(134, 401)
+        Me.btnAddPokemon.Name = "btnAddPokemon"
+        Me.btnAddPokemon.Size = New System.Drawing.Size(116, 23)
+        Me.btnAddPokemon.TabIndex = 4
+        Me.btnAddPokemon.Text = "Add Pokemon"
+        Me.btnAddPokemon.UseVisualStyleBackColor = True
+        '
         'PickPokemonForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(744, 445)
+        Me.Controls.Add(Me.btnAddPokemon)
         Me.Controls.Add(Me.dgvPickPokemon)
         Me.Controls.Add(Me.Button1)
         Me.Name = "PickPokemonForm"
         Me.Text = "PickPokemonForm"
         CType(Me.dgvPickPokemon, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PokemonDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.PokemonBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PokemonDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -163,4 +174,5 @@ Partial Class PickPokemonForm
     Friend WithEvents Move2DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents Move3DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents Move4DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents btnAddPokemon As Button
 End Class

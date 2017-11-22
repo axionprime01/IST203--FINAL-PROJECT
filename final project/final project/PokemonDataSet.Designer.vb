@@ -922,19 +922,9 @@ Namespace PokemonDataSetTableAdapters
             Me._adapter.TableMappings.Add(tableMapping)
             Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.DeleteCommand.Connection = Me.Connection
-            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[Pokemon] WHERE (([ID] = @Original_ID) AND ([name] = @Original_"& _ 
-                "name) AND ([typing] = @Original_typing) AND ([ability] = @Original_ability) AND "& _ 
-                "([move1] = @Original_move1) AND ([move2] = @Original_move2) AND ([move3] = @Orig"& _ 
-                "inal_move3) AND ([move4] = @Original_move4))"
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM Pokemon"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE  (ID = @ID)"
             Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "name", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_typing", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typing", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ability", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ability", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_move1", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move1", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_move2", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move2", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_move3", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move3", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_move4", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move4", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ID", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
             Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Pokemon] ([ID], [name], [typing], [ability], [move1], [move2],"& _ 
@@ -1037,43 +1027,8 @@ Namespace PokemonDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
-        Public Overloads Overridable Function Delete(ByVal Original_ID As Integer, ByVal Original_name As String, ByVal Original_typing As String, ByVal Original_ability As String, ByVal Original_move1 As String, ByVal Original_move2 As String, ByVal Original_move3 As String, ByVal Original_move4 As String) As Integer
-            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_ID,Integer)
-            If (Original_name Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_name")
-            Else
-                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(Original_name,String)
-            End If
-            If (Original_typing Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_typing")
-            Else
-                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_typing,String)
-            End If
-            If (Original_ability Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_ability")
-            Else
-                Me.Adapter.DeleteCommand.Parameters(3).Value = CType(Original_ability,String)
-            End If
-            If (Original_move1 Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_move1")
-            Else
-                Me.Adapter.DeleteCommand.Parameters(4).Value = CType(Original_move1,String)
-            End If
-            If (Original_move2 Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_move2")
-            Else
-                Me.Adapter.DeleteCommand.Parameters(5).Value = CType(Original_move2,String)
-            End If
-            If (Original_move3 Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_move3")
-            Else
-                Me.Adapter.DeleteCommand.Parameters(6).Value = CType(Original_move3,String)
-            End If
-            If (Original_move4 Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_move4")
-            Else
-                Me.Adapter.DeleteCommand.Parameters(7).Value = CType(Original_move4,String)
-            End If
+        Public Overloads Overridable Function Delete(ByVal ID As Integer) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(ID,Integer)
             Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
             If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
                         <> Global.System.Data.ConnectionState.Open) Then
