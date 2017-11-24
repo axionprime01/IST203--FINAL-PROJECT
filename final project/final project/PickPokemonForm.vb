@@ -17,13 +17,21 @@ Public Class PickPokemonForm
     End Sub
 
     Private Sub btnAddPokemon_Click(sender As Object, e As EventArgs) Handles btnAddPokemon.Click
-        If dgvPickPokemon.SelectedRows.Count > 0 Then
-            Dim dexID As Short = CShort(dgvPickPokemon.SelectedRows(0).Cells(0).Value)
-            If mPokemon.Delete(dexID) Then
-                dgvPickPokemon.DataSource = mPokemon.Items
-            Else
-                MessageBox.Show("could not delete pokemon")
-            End If
-        End If
+        'Dim index As Integer
+        'If index < 6 Then
+        '    Do While index < 6
+        '        index += 1
+        '        If dgvPickPokemon.SelectedRows.Count > 0 Then
+        '            Dim dexID As Short = CShort(dgvPickPokemon.SelectedRows(0).Cells(0).Value)
+        '            If mPokemon.Delete(dexID) Then
+        '                dgvPickPokemon.DataSource = mPokemon.Items
+        '            Else
+        '                MessageBox.Show("could not delete pokemon")
+        '            End If
+        '        End If
+        '    Loop
+        'Else
+        '    MessageBox.Show("hi")
+        'End If
     End Sub
 End Class

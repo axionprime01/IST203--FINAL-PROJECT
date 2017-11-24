@@ -120,6 +120,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PokemonDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="PokemonDataSet.vb">
+      <DependentUpon>PokemonDataSet.xsd</DependentUpon>
+    </Compile>
     <Compile Include="ViewTeamForm.Designer.vb">
       <DependentUpon>ViewTeamForm.vb</DependentUpon>
     </Compile>
