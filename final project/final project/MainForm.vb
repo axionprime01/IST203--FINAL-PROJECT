@@ -6,4 +6,8 @@
     Private Sub LookForAPokemonToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles LookForAPokemonToolStripMenuItem.Click
         PickPokemonForm.ShowDialog()
     End Sub
+
+    Private Sub AddPokemonToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles AddPokemonToolStripMenuItem.Click
+        addpokemon.ShowDialog()
+    End Sub
 End Class

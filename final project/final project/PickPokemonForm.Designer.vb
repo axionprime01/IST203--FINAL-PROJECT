@@ -37,6 +37,7 @@ Partial Class PickPokemonForm
         Me.PokemonDataSet = New final_project.PokemonDataSet()
         Me.PokemonTableAdapter = New final_project.PokemonDataSetTableAdapters.PokemonTableAdapter()
         Me.btnAddPokemon = New System.Windows.Forms.Button()
+        Me.btnNEWPKMNINSTANCE = New System.Windows.Forms.Button()
         CType(Me.dgvPickPokemon, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PokemonBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PokemonDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -138,18 +139,28 @@ Partial Class PickPokemonForm
         '
         'btnAddPokemon
         '
-        Me.btnAddPokemon.Location = New System.Drawing.Point(134, 401)
+        Me.btnAddPokemon.Location = New System.Drawing.Point(95, 401)
         Me.btnAddPokemon.Name = "btnAddPokemon"
-        Me.btnAddPokemon.Size = New System.Drawing.Size(116, 23)
+        Me.btnAddPokemon.Size = New System.Drawing.Size(155, 23)
         Me.btnAddPokemon.TabIndex = 4
-        Me.btnAddPokemon.Text = "Add Pokemon"
+        Me.btnAddPokemon.Text = "Add Pokemon to team"
         Me.btnAddPokemon.UseVisualStyleBackColor = True
+        '
+        'btnNEWPKMNINSTANCE
+        '
+        Me.btnNEWPKMNINSTANCE.Location = New System.Drawing.Point(503, 402)
+        Me.btnNEWPKMNINSTANCE.Name = "btnNEWPKMNINSTANCE"
+        Me.btnNEWPKMNINSTANCE.Size = New System.Drawing.Size(210, 23)
+        Me.btnNEWPKMNINSTANCE.TabIndex = 5
+        Me.btnNEWPKMNINSTANCE.Text = "add a new pokemon to the dex"
+        Me.btnNEWPKMNINSTANCE.UseVisualStyleBackColor = True
         '
         'PickPokemonForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(744, 445)
+        Me.Controls.Add(Me.btnNEWPKMNINSTANCE)
         Me.Controls.Add(Me.btnAddPokemon)
         Me.Controls.Add(Me.dgvPickPokemon)
         Me.Controls.Add(Me.Button1)
@@ -175,4 +186,5 @@ Partial Class PickPokemonForm
     Friend WithEvents Move3DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents Move4DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents btnAddPokemon As Button
+    Friend WithEvents btnNEWPKMNINSTANCE As Button
 End Class

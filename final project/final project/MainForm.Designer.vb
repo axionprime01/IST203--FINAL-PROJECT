@@ -29,6 +29,7 @@ Partial Class MainForm
         Me.TeamsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CreateTeamToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ViewSavedTeamsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.AddPokemonToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
@@ -55,7 +56,7 @@ Partial Class MainForm
         '
         'PokemonToolStripMenuItem
         '
-        Me.PokemonToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LookForAPokemonToolStripMenuItem})
+        Me.PokemonToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LookForAPokemonToolStripMenuItem, Me.AddPokemonToolStripMenuItem})
         Me.PokemonToolStripMenuItem.Name = "PokemonToolStripMenuItem"
         Me.PokemonToolStripMenuItem.Size = New System.Drawing.Size(82, 24)
         Me.PokemonToolStripMenuItem.Text = "Pokemon"
@@ -85,6 +86,12 @@ Partial Class MainForm
         Me.ViewSavedTeamsToolStripMenuItem.Size = New System.Drawing.Size(202, 26)
         Me.ViewSavedTeamsToolStripMenuItem.Text = "view Saved teams"
         '
+        'AddPokemonToolStripMenuItem
+        '
+        Me.AddPokemonToolStripMenuItem.Name = "AddPokemonToolStripMenuItem"
+        Me.AddPokemonToolStripMenuItem.Size = New System.Drawing.Size(218, 26)
+        Me.AddPokemonToolStripMenuItem.Text = "add pokemon"
+        '
         'MainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
@@ -109,4 +116,5 @@ Partial Class MainForm
     Friend WithEvents TeamsToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CreateTeamToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ViewSavedTeamsToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents AddPokemonToolStripMenuItem As ToolStripMenuItem
 End Class

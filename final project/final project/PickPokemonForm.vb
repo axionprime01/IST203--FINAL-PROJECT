@@ -34,4 +34,9 @@ Public Class PickPokemonForm
         '    MessageBox.Show("hi")
         'End If
     End Sub
+
+    Private Sub btnNEWPKMNINSTANCE_Click(sender As Object, e As EventArgs) Handles btnNEWPKMNINSTANCE.Click
+        Me.Close()
+        addpokemon.ShowDialog()
+    End Sub
 End Class

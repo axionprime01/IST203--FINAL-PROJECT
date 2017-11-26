@@ -14,3 +14,4 @@ D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final proj
 D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final project\final project\obj\Debug\final project.pdb
 D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final project\final project\bin\Debug\Pokemon.mdf
 D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final project\final project\bin\Debug\Pokemon_log.ldf
+D:\CS 203\IST203 githubsourcetree stuff\GITHUB projects\final project\final project\final project\obj\Debug\final_project.addpokemon.resources
