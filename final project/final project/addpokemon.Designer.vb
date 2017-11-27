@@ -41,6 +41,7 @@ Partial Class addpokemon
         Me.txtID = New System.Windows.Forms.TextBox()
         Me.txtName = New System.Windows.Forms.TextBox()
         Me.txtMove4 = New System.Windows.Forms.TextBox()
+        Me.StatusStrip1 = New System.Windows.Forms.StatusStrip()
         Me.SuspendLayout()
         '
         'btnAddPokemon
@@ -198,11 +199,21 @@ Partial Class addpokemon
         Me.txtMove4.Size = New System.Drawing.Size(100, 22)
         Me.txtMove4.TabIndex = 18
         '
+        'StatusStrip1
+        '
+        Me.StatusStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
+        Me.StatusStrip1.Location = New System.Drawing.Point(0, 332)
+        Me.StatusStrip1.Name = "StatusStrip1"
+        Me.StatusStrip1.Size = New System.Drawing.Size(345, 22)
+        Me.StatusStrip1.TabIndex = 19
+        Me.StatusStrip1.Text = "StatusStrip1"
+        '
         'addpokemon
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(345, 316)
+        Me.ClientSize = New System.Drawing.Size(345, 354)
+        Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.txtMove4)
         Me.Controls.Add(Me.txtName)
         Me.Controls.Add(Me.txtID)
@@ -248,4 +259,5 @@ Partial Class addpokemon
     Friend WithEvents txtID As TextBox
     Friend WithEvents txtName As TextBox
     Friend WithEvents txtMove4 As TextBox
+    Friend WithEvents StatusStrip1 As StatusStrip
 End Class
