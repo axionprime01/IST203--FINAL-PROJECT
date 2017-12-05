@@ -22,8 +22,19 @@ Partial Class ViewTeamForm
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(ViewTeamForm))
-        Me.DataGridView1 = New System.Windows.Forms.DataGridView()
+        Me.dgvteam = New System.Windows.Forms.DataGridView()
+        Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TypingDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.AbilityDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Move1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Move2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Move3DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.Move4DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
+        Me.TeamBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+        Me.PokemonDataSet = New final_project.PokemonDataSet()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
         Me.ToolStripComboBox1 = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
@@ -34,18 +45,82 @@ Partial Class ViewTeamForm
         Me.tsbtnDeleteTeam = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbtnCancel = New System.Windows.Forms.ToolStripButton()
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TeamTableAdapter = New final_project.PokemonDataSetTableAdapters.teamTableAdapter()
+        CType(Me.dgvteam, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TeamBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PokemonDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.ToolStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
-        'DataGridView1
+        'dgvteam
         '
-        Me.DataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DataGridView1.Location = New System.Drawing.Point(12, 42)
-        Me.DataGridView1.Name = "DataGridView1"
-        Me.DataGridView1.RowTemplate.Height = 24
-        Me.DataGridView1.Size = New System.Drawing.Size(585, 365)
-        Me.DataGridView1.TabIndex = 1
+        Me.dgvteam.AutoGenerateColumns = False
+        Me.dgvteam.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.dgvteam.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn, Me.NameDataGridViewTextBoxColumn, Me.TypingDataGridViewTextBoxColumn, Me.AbilityDataGridViewTextBoxColumn, Me.Move1DataGridViewTextBoxColumn, Me.Move2DataGridViewTextBoxColumn, Me.Move3DataGridViewTextBoxColumn, Me.Move4DataGridViewTextBoxColumn})
+        Me.dgvteam.DataSource = Me.TeamBindingSource
+        Me.dgvteam.Location = New System.Drawing.Point(12, 42)
+        Me.dgvteam.Name = "dgvteam"
+        Me.dgvteam.RowTemplate.Height = 24
+        Me.dgvteam.Size = New System.Drawing.Size(585, 365)
+        Me.dgvteam.TabIndex = 1
+        '
+        'IDDataGridViewTextBoxColumn
+        '
+        Me.IDDataGridViewTextBoxColumn.DataPropertyName = "ID"
+        Me.IDDataGridViewTextBoxColumn.HeaderText = "ID"
+        Me.IDDataGridViewTextBoxColumn.Name = "IDDataGridViewTextBoxColumn"
+        '
+        'NameDataGridViewTextBoxColumn
+        '
+        Me.NameDataGridViewTextBoxColumn.DataPropertyName = "name"
+        Me.NameDataGridViewTextBoxColumn.HeaderText = "name"
+        Me.NameDataGridViewTextBoxColumn.Name = "NameDataGridViewTextBoxColumn"
+        '
+        'TypingDataGridViewTextBoxColumn
+        '
+        Me.TypingDataGridViewTextBoxColumn.DataPropertyName = "typing"
+        Me.TypingDataGridViewTextBoxColumn.HeaderText = "typing"
+        Me.TypingDataGridViewTextBoxColumn.Name = "TypingDataGridViewTextBoxColumn"
+        '
+        'AbilityDataGridViewTextBoxColumn
+        '
+        Me.AbilityDataGridViewTextBoxColumn.DataPropertyName = "ability"
+        Me.AbilityDataGridViewTextBoxColumn.HeaderText = "ability"
+        Me.AbilityDataGridViewTextBoxColumn.Name = "AbilityDataGridViewTextBoxColumn"
+        '
+        'Move1DataGridViewTextBoxColumn
+        '
+        Me.Move1DataGridViewTextBoxColumn.DataPropertyName = "move1"
+        Me.Move1DataGridViewTextBoxColumn.HeaderText = "move1"
+        Me.Move1DataGridViewTextBoxColumn.Name = "Move1DataGridViewTextBoxColumn"
+        '
+        'Move2DataGridViewTextBoxColumn
+        '
+        Me.Move2DataGridViewTextBoxColumn.DataPropertyName = "move2"
+        Me.Move2DataGridViewTextBoxColumn.HeaderText = "move2"
+        Me.Move2DataGridViewTextBoxColumn.Name = "Move2DataGridViewTextBoxColumn"
+        '
+        'Move3DataGridViewTextBoxColumn
+        '
+        Me.Move3DataGridViewTextBoxColumn.DataPropertyName = "move3"
+        Me.Move3DataGridViewTextBoxColumn.HeaderText = "move3"
+        Me.Move3DataGridViewTextBoxColumn.Name = "Move3DataGridViewTextBoxColumn"
+        '
+        'Move4DataGridViewTextBoxColumn
+        '
+        Me.Move4DataGridViewTextBoxColumn.DataPropertyName = "move4"
+        Me.Move4DataGridViewTextBoxColumn.HeaderText = "move4"
+        Me.Move4DataGridViewTextBoxColumn.Name = "Move4DataGridViewTextBoxColumn"
+        '
+        'TeamBindingSource
+        '
+        Me.TeamBindingSource.DataMember = "team"
+        Me.TeamBindingSource.DataSource = Me.PokemonDataSet
+        '
+        'PokemonDataSet
+        '
+        Me.PokemonDataSet.DataSetName = "PokemonDataSet"
+        Me.PokemonDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema
         '
         'ToolStrip1
         '
@@ -69,11 +144,11 @@ Partial Class ViewTeamForm
         '
         'tsbtnDeletePokemon
         '
-        Me.tsbtnDeletePokemon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbtnDeletePokemon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.tsbtnDeletePokemon.Image = CType(resources.GetObject("tsbtnDeletePokemon.Image"), System.Drawing.Image)
         Me.tsbtnDeletePokemon.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtnDeletePokemon.Name = "tsbtnDeletePokemon"
-        Me.tsbtnDeletePokemon.Size = New System.Drawing.Size(24, 25)
+        Me.tsbtnDeletePokemon.Size = New System.Drawing.Size(122, 25)
         Me.tsbtnDeletePokemon.Text = "Delete Pokemon"
         Me.tsbtnDeletePokemon.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
         '
@@ -84,11 +159,11 @@ Partial Class ViewTeamForm
         '
         'tsbtnAddPokemon
         '
-        Me.tsbtnAddPokemon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbtnAddPokemon.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.tsbtnAddPokemon.Image = CType(resources.GetObject("tsbtnAddPokemon.Image"), System.Drawing.Image)
         Me.tsbtnAddPokemon.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtnAddPokemon.Name = "tsbtnAddPokemon"
-        Me.tsbtnAddPokemon.Size = New System.Drawing.Size(24, 25)
+        Me.tsbtnAddPokemon.Size = New System.Drawing.Size(106, 25)
         Me.tsbtnAddPokemon.Text = "Add Pokemon"
         '
         'ToolStripSeparator3
@@ -98,11 +173,11 @@ Partial Class ViewTeamForm
         '
         'tsbtnDeleteTeam
         '
-        Me.tsbtnDeleteTeam.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbtnDeleteTeam.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.tsbtnDeleteTeam.Image = CType(resources.GetObject("tsbtnDeleteTeam.Image"), System.Drawing.Image)
         Me.tsbtnDeleteTeam.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtnDeleteTeam.Name = "tsbtnDeleteTeam"
-        Me.tsbtnDeleteTeam.Size = New System.Drawing.Size(24, 25)
+        Me.tsbtnDeleteTeam.Size = New System.Drawing.Size(97, 25)
         Me.tsbtnDeleteTeam.Text = "Delete Team"
         '
         'ToolStripSeparator4
@@ -112,12 +187,16 @@ Partial Class ViewTeamForm
         '
         'tsbtnCancel
         '
-        Me.tsbtnCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.tsbtnCancel.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.tsbtnCancel.Image = CType(resources.GetObject("tsbtnCancel.Image"), System.Drawing.Image)
         Me.tsbtnCancel.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtnCancel.Name = "tsbtnCancel"
-        Me.tsbtnCancel.Size = New System.Drawing.Size(24, 25)
+        Me.tsbtnCancel.Size = New System.Drawing.Size(57, 25)
         Me.tsbtnCancel.Text = "Cancel"
+        '
+        'TeamTableAdapter
+        '
+        Me.TeamTableAdapter.ClearBeforeFill = True
         '
         'ViewTeamForm
         '
@@ -125,10 +204,12 @@ Partial Class ViewTeamForm
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(609, 419)
         Me.Controls.Add(Me.ToolStrip1)
-        Me.Controls.Add(Me.DataGridView1)
+        Me.Controls.Add(Me.dgvteam)
         Me.Name = "ViewTeamForm"
         Me.Text = "ViewTeamForm"
-        CType(Me.DataGridView1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.dgvteam, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TeamBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PokemonDataSet, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ToolStrip1.ResumeLayout(False)
         Me.ToolStrip1.PerformLayout()
         Me.ResumeLayout(False)
@@ -136,7 +217,7 @@ Partial Class ViewTeamForm
 
     End Sub
 
-    Friend WithEvents DataGridView1 As DataGridView
+    Friend WithEvents dgvteam As DataGridView
     Friend WithEvents ToolStrip1 As ToolStrip
     Friend WithEvents ToolStripComboBox1 As ToolStripComboBox
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
@@ -147,4 +228,15 @@ Partial Class ViewTeamForm
     Friend WithEvents tsbtnDeleteTeam As ToolStripButton
     Friend WithEvents ToolStripSeparator4 As ToolStripSeparator
     Friend WithEvents tsbtnCancel As ToolStripButton
+    Friend WithEvents PokemonDataSet As PokemonDataSet
+    Friend WithEvents TeamBindingSource As BindingSource
+    Friend WithEvents TeamTableAdapter As PokemonDataSetTableAdapters.teamTableAdapter
+    Friend WithEvents IDDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents NameDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents TypingDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents AbilityDataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents Move1DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents Move2DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents Move3DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents Move4DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
 End Class

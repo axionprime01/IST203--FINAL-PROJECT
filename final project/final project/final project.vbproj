@@ -129,6 +129,7 @@
     <Compile Include="PokemonDataSet.vb">
       <DependentUpon>PokemonDataSet.xsd</DependentUpon>
     </Compile>
+    <Compile Include="team.vb" />
     <Compile Include="ViewTeamForm.Designer.vb">
       <DependentUpon>ViewTeamForm.vb</DependentUpon>
     </Compile>

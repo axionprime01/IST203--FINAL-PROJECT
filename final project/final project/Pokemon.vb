@@ -28,12 +28,6 @@ Public Class Pokemon
             Return False
         End Try
     End Function
-    Public ReadOnly Property AppointmentList As DataTable
-        Get
-            Dim listAdapter As New PokemonDataSetTableAdapters.PokemonTableAdapter
-            Return listAdapter.GetData()
-        End Get
-    End Property
     Public ReadOnly Property Items() As DataTable
         Get
             Return adapter.GetData()
