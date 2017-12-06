@@ -6,6 +6,7 @@ Public Class PickPokemonForm
     Dim index As Integer
     Private mPokemon As New Pokemon
     Dim teamsize As Integer = teamtablenumber.Count()
+    Private formloading As Boolean = True
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Me.Close()
     End Sub
@@ -14,7 +15,15 @@ Public Class PickPokemonForm
         mPokemon.Pokemonlist.Reset()
         'TODO: This line of code loads data into the 'PokemonDataSet.Pokemon' table. You can move, or remove it, as needed.
         Me.PokemonTableAdapter.Fill(Me.PokemonDataSet.Pokemon)
-        cboType.SelectedIndex = -1
+        Dim mtype As New Type
+        With cboType
+            .DataSource = mtype.Items
+            .DisplayMember = "typing"
+            .ValueMember = "typeid"
+            .SelectedIndex = -1
+        End With
+        formloading = False
+        dgvPickPokemon.DataSource = mPokemon.Items
 
     End Sub
     Private Sub btnAddPokemon_Click(sender As Object, e As EventArgs) Handles btnAddPokemon.Click
@@ -22,6 +31,7 @@ Public Class PickPokemonForm
             If index < 6 Then
                 If dgvPickPokemon.SelectedRows.Count > 0 Then
                     index += 1
+                    Dim pkmnindex As Integer = dgvPickPokemon.CurrentCell.RowIndex
                     Dim dexID As Short = CShort(dgvPickPokemon.SelectedRows(0).Cells(0).Value)
                     Dim name As String = CStr(dgvPickPokemon.SelectedRows(0).Cells(1).Value)
                     Dim typeid As Integer = CInt(dgvPickPokemon.SelectedRows(0).Cells(2).Value)
@@ -30,10 +40,15 @@ Public Class PickPokemonForm
                     Dim move2 As String = CStr(dgvPickPokemon.SelectedRows(0).Cells(5).Value)
                     Dim move3 As String = CStr(dgvPickPokemon.SelectedRows(0).Cells(6).Value)
                     Dim move4 As String = CStr(dgvPickPokemon.SelectedRows(0).Cells(7).Value)
-                    If mPokemon.Delete(dexID) Then
-                        teamadapter.Insert(dexID, name, typeid, ability, move1, move2, move3, move4)
-                        dgvPickPokemon.DataSource = mPokemon.Items
-                    End If
+                    teamadapter.Insert(dexID, name, typeid, ability, move1, move2, move3, move4)
+
+
+                    Dim currencyManager1 As CurrencyManager = CType(BindingContext(dgvPickPokemon.DataSource), CurrencyManager)
+                    currencyManager1.SuspendBinding()
+                    dgvPickPokemon.Rows(pkmnindex).Visible = False
+                    currencyManager1.ResumeBinding()
+
+
                 End If
             End If
         End If
@@ -67,8 +82,10 @@ Public Class PickPokemonForm
         End If
     End Sub
     Private Sub cboType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboType.SelectedIndexChanged
-        Dim typeid As Short = CShort(cboType.SelectedValue)
-        dgvPickPokemon.DataSource = mPokemon.GetByType(typeid)
+        If formloading = False Then
+            Dim typeid As Short = CShort(cboType.SelectedValue)
+            dgvPickPokemon.DataSource = mPokemon.GetByType(typeid)
+        End If
     End Sub
 
     Private Sub btnSearchAll_Click(sender As Object, e As EventArgs) Handles btnSearchAll.Click
