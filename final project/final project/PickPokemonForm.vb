@@ -5,7 +5,6 @@ Public Class PickPokemonForm
     Dim teamtablenumber As New PokemonDataSet.teamDataTable
     Dim index As Integer
     Private mPokemon As New Pokemon
-    Dim teamsize As Integer = teamtablenumber.Count()
     Private formloading As Boolean = True
     Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
         Me.Close()
@@ -24,9 +23,11 @@ Public Class PickPokemonForm
         End With
         formloading = False
         dgvPickPokemon.DataSource = mPokemon.Items
-
+        index = 0
     End Sub
     Private Sub btnAddPokemon_Click(sender As Object, e As EventArgs) Handles btnAddPokemon.Click
+        teamtablenumber = teamadapter.GetData()
+        Dim teamsize As Integer = teamtablenumber.Count()
         If teamsize < 6 Then
             If index < 6 Then
                 If dgvPickPokemon.SelectedRows.Count > 0 Then

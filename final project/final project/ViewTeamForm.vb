@@ -36,4 +36,8 @@ Public Class ViewTeamForm
             End If
         End If
     End Sub
+
+    Private Sub tsbtnShowTeam_Click(sender As Object, e As EventArgs) Handles tsbtnShowTeam.Click
+        dgvteam.DataSource = mTeam.Items
+    End Sub
 End Class

@@ -27,7 +27,6 @@ Partial Class ViewTeamForm
         Me.dgvteam = New System.Windows.Forms.DataGridView()
         Me.IDDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.NameDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
-        Me.TypingDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.AbilityDataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Move1DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
         Me.Move2DataGridViewTextBoxColumn = New System.Windows.Forms.DataGridViewTextBoxColumn()
@@ -36,7 +35,6 @@ Partial Class ViewTeamForm
         Me.TeamBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.PokemonDataSet = New final_project.PokemonDataSet()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
-        Me.ToolStripComboBox1 = New System.Windows.Forms.ToolStripComboBox()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbtnDeletePokemon = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
@@ -46,6 +44,7 @@ Partial Class ViewTeamForm
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbtnCancel = New System.Windows.Forms.ToolStripButton()
         Me.TeamTableAdapter = New final_project.PokemonDataSetTableAdapters.teamTableAdapter()
+        Me.tsbtnShowTeam = New System.Windows.Forms.ToolStripButton()
         CType(Me.dgvteam, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TeamBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PokemonDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -56,7 +55,7 @@ Partial Class ViewTeamForm
         '
         Me.dgvteam.AutoGenerateColumns = False
         Me.dgvteam.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.dgvteam.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn, Me.NameDataGridViewTextBoxColumn, Me.TypingDataGridViewTextBoxColumn, Me.AbilityDataGridViewTextBoxColumn, Me.Move1DataGridViewTextBoxColumn, Me.Move2DataGridViewTextBoxColumn, Me.Move3DataGridViewTextBoxColumn, Me.Move4DataGridViewTextBoxColumn})
+        Me.dgvteam.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn, Me.NameDataGridViewTextBoxColumn, Me.AbilityDataGridViewTextBoxColumn, Me.Move1DataGridViewTextBoxColumn, Me.Move2DataGridViewTextBoxColumn, Me.Move3DataGridViewTextBoxColumn, Me.Move4DataGridViewTextBoxColumn})
         Me.dgvteam.DataSource = Me.TeamBindingSource
         Me.dgvteam.Location = New System.Drawing.Point(12, 42)
         Me.dgvteam.Name = "dgvteam"
@@ -75,12 +74,6 @@ Partial Class ViewTeamForm
         Me.NameDataGridViewTextBoxColumn.DataPropertyName = "name"
         Me.NameDataGridViewTextBoxColumn.HeaderText = "name"
         Me.NameDataGridViewTextBoxColumn.Name = "NameDataGridViewTextBoxColumn"
-        '
-        'TypingDataGridViewTextBoxColumn
-        '
-        Me.TypingDataGridViewTextBoxColumn.DataPropertyName = "typing"
-        Me.TypingDataGridViewTextBoxColumn.HeaderText = "typing"
-        Me.TypingDataGridViewTextBoxColumn.Name = "TypingDataGridViewTextBoxColumn"
         '
         'AbilityDataGridViewTextBoxColumn
         '
@@ -125,22 +118,17 @@ Partial Class ViewTeamForm
         'ToolStrip1
         '
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripComboBox1, Me.ToolStripSeparator1, Me.tsbtnDeletePokemon, Me.ToolStripSeparator2, Me.tsbtnAddPokemon, Me.ToolStripSeparator3, Me.tsbtnDeleteTeam, Me.ToolStripSeparator4, Me.tsbtnCancel})
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.tsbtnShowTeam, Me.ToolStripSeparator1, Me.tsbtnDeletePokemon, Me.ToolStripSeparator2, Me.tsbtnAddPokemon, Me.ToolStripSeparator3, Me.tsbtnDeleteTeam, Me.ToolStripSeparator4, Me.tsbtnCancel})
         Me.ToolStrip1.Location = New System.Drawing.Point(0, 0)
         Me.ToolStrip1.Name = "ToolStrip1"
-        Me.ToolStrip1.Size = New System.Drawing.Size(609, 28)
+        Me.ToolStrip1.Size = New System.Drawing.Size(609, 27)
         Me.ToolStrip1.TabIndex = 2
         Me.ToolStrip1.Text = "ToolStrip1"
-        '
-        'ToolStripComboBox1
-        '
-        Me.ToolStripComboBox1.Name = "ToolStripComboBox1"
-        Me.ToolStripComboBox1.Size = New System.Drawing.Size(121, 28)
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 28)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 27)
         '
         'tsbtnDeletePokemon
         '
@@ -148,14 +136,14 @@ Partial Class ViewTeamForm
         Me.tsbtnDeletePokemon.Image = CType(resources.GetObject("tsbtnDeletePokemon.Image"), System.Drawing.Image)
         Me.tsbtnDeletePokemon.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtnDeletePokemon.Name = "tsbtnDeletePokemon"
-        Me.tsbtnDeletePokemon.Size = New System.Drawing.Size(122, 25)
+        Me.tsbtnDeletePokemon.Size = New System.Drawing.Size(122, 24)
         Me.tsbtnDeletePokemon.Text = "Delete Pokemon"
         Me.tsbtnDeletePokemon.TextImageRelation = System.Windows.Forms.TextImageRelation.TextAboveImage
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 28)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 27)
         '
         'tsbtnAddPokemon
         '
@@ -163,13 +151,13 @@ Partial Class ViewTeamForm
         Me.tsbtnAddPokemon.Image = CType(resources.GetObject("tsbtnAddPokemon.Image"), System.Drawing.Image)
         Me.tsbtnAddPokemon.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtnAddPokemon.Name = "tsbtnAddPokemon"
-        Me.tsbtnAddPokemon.Size = New System.Drawing.Size(106, 25)
+        Me.tsbtnAddPokemon.Size = New System.Drawing.Size(106, 24)
         Me.tsbtnAddPokemon.Text = "Add Pokemon"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 28)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(6, 27)
         '
         'tsbtnDeleteTeam
         '
@@ -177,13 +165,13 @@ Partial Class ViewTeamForm
         Me.tsbtnDeleteTeam.Image = CType(resources.GetObject("tsbtnDeleteTeam.Image"), System.Drawing.Image)
         Me.tsbtnDeleteTeam.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtnDeleteTeam.Name = "tsbtnDeleteTeam"
-        Me.tsbtnDeleteTeam.Size = New System.Drawing.Size(97, 25)
+        Me.tsbtnDeleteTeam.Size = New System.Drawing.Size(97, 24)
         Me.tsbtnDeleteTeam.Text = "Delete Team"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 28)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(6, 27)
         '
         'tsbtnCancel
         '
@@ -191,12 +179,21 @@ Partial Class ViewTeamForm
         Me.tsbtnCancel.Image = CType(resources.GetObject("tsbtnCancel.Image"), System.Drawing.Image)
         Me.tsbtnCancel.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.tsbtnCancel.Name = "tsbtnCancel"
-        Me.tsbtnCancel.Size = New System.Drawing.Size(57, 25)
+        Me.tsbtnCancel.Size = New System.Drawing.Size(57, 24)
         Me.tsbtnCancel.Text = "Cancel"
         '
         'TeamTableAdapter
         '
         Me.TeamTableAdapter.ClearBeforeFill = True
+        '
+        'tsbtnShowTeam
+        '
+        Me.tsbtnShowTeam.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.tsbtnShowTeam.Image = CType(resources.GetObject("tsbtnShowTeam.Image"), System.Drawing.Image)
+        Me.tsbtnShowTeam.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnShowTeam.Name = "tsbtnShowTeam"
+        Me.tsbtnShowTeam.Size = New System.Drawing.Size(85, 24)
+        Me.tsbtnShowTeam.Text = "show team"
         '
         'ViewTeamForm
         '
@@ -219,7 +216,6 @@ Partial Class ViewTeamForm
 
     Friend WithEvents dgvteam As DataGridView
     Friend WithEvents ToolStrip1 As ToolStrip
-    Friend WithEvents ToolStripComboBox1 As ToolStripComboBox
     Friend WithEvents ToolStripSeparator1 As ToolStripSeparator
     Friend WithEvents tsbtnDeletePokemon As ToolStripButton
     Friend WithEvents ToolStripSeparator2 As ToolStripSeparator
@@ -239,4 +235,5 @@ Partial Class ViewTeamForm
     Friend WithEvents Move2DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents Move3DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents Move4DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
+    Friend WithEvents tsbtnShowTeam As ToolStripButton
 End Class
