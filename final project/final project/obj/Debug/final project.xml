@@ -27,6 +27,11 @@ final project
 Represents a strongly typed in-memory cache of data.
 </summary>
 </member>
+<member name="T:final_project.PokemonDataSet.typingDataTable">
+<summary>
+Represents the strongly named DataTable class.
+</summary>
+</member>
 <member name="T:final_project.PokemonDataSet.PokemonDataTable">
 <summary>
 Represents the strongly named DataTable class.
@@ -35,6 +40,11 @@ Represents the strongly named DataTable class.
 <member name="T:final_project.PokemonDataSet.teamDataTable">
 <summary>
 Represents the strongly named DataTable class.
+</summary>
+</member>
+<member name="T:final_project.PokemonDataSet.typingRow">
+<summary>
+Represents strongly named DataRow class.
 </summary>
 </member>
 <member name="T:final_project.PokemonDataSet.PokemonRow">
@@ -47,6 +57,11 @@ Represents strongly named DataRow class.
 Represents strongly named DataRow class.
 </summary>
 </member>
+<member name="T:final_project.PokemonDataSet.typingRowChangeEvent">
+<summary>
+Row event argument class
+</summary>
+</member>
 <member name="T:final_project.PokemonDataSet.PokemonRowChangeEvent">
 <summary>
 Row event argument class
@@ -55,6 +70,11 @@ Row event argument class
 <member name="T:final_project.PokemonDataSet.teamRowChangeEvent">
 <summary>
 Row event argument class
+</summary>
+</member>
+<member name="T:final_project.PokemonDataSetTableAdapters.typingTableAdapter">
+<summary>
+Represents the connection and commands used to retrieve and save data.
 </summary>
 </member>
 <member name="T:final_project.PokemonDataSetTableAdapters.PokemonTableAdapter">

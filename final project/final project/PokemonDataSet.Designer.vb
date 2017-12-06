@@ -25,9 +25,13 @@ Option Explicit On
 Partial Public Class PokemonDataSet
     Inherits Global.System.Data.DataSet
     
+    Private tabletyping As typingDataTable
+    
     Private tablePokemon As PokemonDataTable
     
     Private tableteam As teamDataTable
+    
+    Private relationtyping_Pokemon As Global.System.Data.DataRelation
     
     Private _schemaSerializationMode As Global.System.Data.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
     
@@ -58,6 +62,9 @@ Partial Public Class PokemonDataSet
         If (Me.DetermineSchemaSerializationMode(info, context) = Global.System.Data.SchemaSerializationMode.IncludeSchema) Then
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet()
             ds.ReadXmlSchema(New Global.System.Xml.XmlTextReader(New Global.System.IO.StringReader(strSchema)))
+            If (Not (ds.Tables("typing")) Is Nothing) Then
+                MyBase.Tables.Add(New typingDataTable(ds.Tables("typing")))
+            End If
             If (Not (ds.Tables("Pokemon")) Is Nothing) Then
                 MyBase.Tables.Add(New PokemonDataTable(ds.Tables("Pokemon")))
             End If
@@ -80,6 +87,16 @@ Partial Public Class PokemonDataSet
         AddHandler MyBase.Tables.CollectionChanged, schemaChangedHandler
         AddHandler Me.Relations.CollectionChanged, schemaChangedHandler
     End Sub
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+     Global.System.ComponentModel.Browsable(false),  _
+     Global.System.ComponentModel.DesignerSerializationVisibility(Global.System.ComponentModel.DesignerSerializationVisibility.Content)>  _
+    Public ReadOnly Property typing() As typingDataTable
+        Get
+            Return Me.tabletyping
+        End Get
+    End Property
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
@@ -168,6 +185,9 @@ Partial Public Class PokemonDataSet
             Me.Reset
             Dim ds As Global.System.Data.DataSet = New Global.System.Data.DataSet()
             ds.ReadXml(reader)
+            If (Not (ds.Tables("typing")) Is Nothing) Then
+                MyBase.Tables.Add(New typingDataTable(ds.Tables("typing")))
+            End If
             If (Not (ds.Tables("Pokemon")) Is Nothing) Then
                 MyBase.Tables.Add(New PokemonDataTable(ds.Tables("Pokemon")))
             End If
@@ -206,6 +226,12 @@ Partial Public Class PokemonDataSet
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Friend Overloads Sub InitVars(ByVal initTable As Boolean)
+        Me.tabletyping = CType(MyBase.Tables("typing"),typingDataTable)
+        If (initTable = true) Then
+            If (Not (Me.tabletyping) Is Nothing) Then
+                Me.tabletyping.InitVars
+            End If
+        End If
         Me.tablePokemon = CType(MyBase.Tables("Pokemon"),PokemonDataTable)
         If (initTable = true) Then
             If (Not (Me.tablePokemon) Is Nothing) Then
@@ -218,6 +244,7 @@ Partial Public Class PokemonDataSet
                 Me.tableteam.InitVars
             End If
         End If
+        Me.relationtyping_Pokemon = Me.Relations("typing_Pokemon")
     End Sub
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
@@ -228,11 +255,21 @@ Partial Public Class PokemonDataSet
         Me.Namespace = "http://tempuri.org/PokemonDataSet.xsd"
         Me.EnforceConstraints = true
         Me.SchemaSerializationMode = Global.System.Data.SchemaSerializationMode.IncludeSchema
+        Me.tabletyping = New typingDataTable()
+        MyBase.Tables.Add(Me.tabletyping)
         Me.tablePokemon = New PokemonDataTable()
         MyBase.Tables.Add(Me.tablePokemon)
         Me.tableteam = New teamDataTable()
         MyBase.Tables.Add(Me.tableteam)
+        Me.relationtyping_Pokemon = New Global.System.Data.DataRelation("typing_Pokemon", New Global.System.Data.DataColumn() {Me.tabletyping.typeIdColumn}, New Global.System.Data.DataColumn() {Me.tablePokemon.typeidColumn}, false)
+        Me.Relations.Add(Me.relationtyping_Pokemon)
     End Sub
+    
+    <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+     Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Private Function ShouldSerializetyping() As Boolean
+        Return false
+    End Function
     
     <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
@@ -305,10 +342,288 @@ Partial Public Class PokemonDataSet
     End Function
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Public Delegate Sub typingRowChangeEventHandler(ByVal sender As Object, ByVal e As typingRowChangeEvent)
+    
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Delegate Sub PokemonRowChangeEventHandler(ByVal sender As Object, ByVal e As PokemonRowChangeEvent)
     
     <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
     Public Delegate Sub teamRowChangeEventHandler(ByVal sender As Object, ByVal e As teamRowChangeEvent)
+    
+    '''<summary>
+    '''Represents the strongly named DataTable class.
+    '''</summary>
+    <Global.System.Serializable(),  _
+     Global.System.Xml.Serialization.XmlSchemaProviderAttribute("GetTypedTableSchema")>  _
+    Partial Public Class typingDataTable
+        Inherits Global.System.Data.TypedTableBase(Of typingRow)
+        
+        Private columntypeId As Global.System.Data.DataColumn
+        
+        Private columntyping As Global.System.Data.DataColumn
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.TableName = "typing"
+            Me.BeginInit
+            Me.InitClass
+            Me.EndInit
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal table As Global.System.Data.DataTable)
+            MyBase.New
+            Me.TableName = table.TableName
+            If (table.CaseSensitive <> table.DataSet.CaseSensitive) Then
+                Me.CaseSensitive = table.CaseSensitive
+            End If
+            If (table.Locale.ToString <> table.DataSet.Locale.ToString) Then
+                Me.Locale = table.Locale
+            End If
+            If (table.Namespace <> table.DataSet.Namespace) Then
+                Me.Namespace = table.Namespace
+            End If
+            Me.Prefix = table.Prefix
+            Me.MinimumCapacity = table.MinimumCapacity
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Sub New(ByVal info As Global.System.Runtime.Serialization.SerializationInfo, ByVal context As Global.System.Runtime.Serialization.StreamingContext)
+            MyBase.New(info, context)
+            Me.InitVars
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property typeIdColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columntypeId
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property typingColumn() As Global.System.Data.DataColumn
+            Get
+                Return Me.columntyping
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Browsable(false)>  _
+        Public ReadOnly Property Count() As Integer
+            Get
+                Return Me.Rows.Count
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Default ReadOnly Property Item(ByVal index As Integer) As typingRow
+            Get
+                Return CType(Me.Rows(index),typingRow)
+            End Get
+        End Property
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event typingRowChanging As typingRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event typingRowChanged As typingRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event typingRowDeleting As typingRowChangeEventHandler
+        
+        <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Event typingRowDeleted As typingRowChangeEventHandler
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Sub AddtypingRow(ByVal row As typingRow)
+            Me.Rows.Add(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overloads Function AddtypingRow(ByVal typeId As Integer, ByVal typing As String) As typingRow
+            Dim rowtypingRow As typingRow = CType(Me.NewRow,typingRow)
+            Dim columnValuesArray() As Object = New Object() {typeId, typing}
+            rowtypingRow.ItemArray = columnValuesArray
+            Me.Rows.Add(rowtypingRow)
+            Return rowtypingRow
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function FindBytypeId(ByVal typeId As Integer) As typingRow
+            Return CType(Me.Rows.Find(New Object() {typeId}),typingRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Overrides Function Clone() As Global.System.Data.DataTable
+            Dim cln As typingDataTable = CType(MyBase.Clone,typingDataTable)
+            cln.InitVars
+            Return cln
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function CreateInstance() As Global.System.Data.DataTable
+            Return New typingDataTable()
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub InitVars()
+            Me.columntypeId = MyBase.Columns("typeId")
+            Me.columntyping = MyBase.Columns("typing")
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitClass()
+            Me.columntypeId = New Global.System.Data.DataColumn("typeId", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columntypeId)
+            Me.columntyping = New Global.System.Data.DataColumn("typing", GetType(String), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columntyping)
+            Me.Constraints.Add(New Global.System.Data.UniqueConstraint("Constraint1", New Global.System.Data.DataColumn() {Me.columntypeId}, true))
+            Me.columntypeId.AllowDBNull = false
+            Me.columntypeId.Unique = true
+            Me.columntyping.MaxLength = 10
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function NewtypingRow() As typingRow
+            Return CType(Me.NewRow,typingRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function NewRowFromBuilder(ByVal builder As Global.System.Data.DataRowBuilder) As Global.System.Data.DataRow
+            Return New typingRow(builder)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Function GetRowType() As Global.System.Type
+            Return GetType(typingRow)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanged(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanged(e)
+            If (Not (Me.typingRowChangedEvent) Is Nothing) Then
+                RaiseEvent typingRowChanged(Me, New typingRowChangeEvent(CType(e.Row,typingRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowChanging(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowChanging(e)
+            If (Not (Me.typingRowChangingEvent) Is Nothing) Then
+                RaiseEvent typingRowChanging(Me, New typingRowChangeEvent(CType(e.Row,typingRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleted(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleted(e)
+            If (Not (Me.typingRowDeletedEvent) Is Nothing) Then
+                RaiseEvent typingRowDeleted(Me, New typingRowChangeEvent(CType(e.Row,typingRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Overrides Sub OnRowDeleting(ByVal e As Global.System.Data.DataRowChangeEventArgs)
+            MyBase.OnRowDeleting(e)
+            If (Not (Me.typingRowDeletingEvent) Is Nothing) Then
+                RaiseEvent typingRowDeleting(Me, New typingRowChangeEvent(CType(e.Row,typingRow), e.Action))
+            End If
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub RemovetypingRow(ByVal row As typingRow)
+            Me.Rows.Remove(row)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Shared Function GetTypedTableSchema(ByVal xs As Global.System.Xml.Schema.XmlSchemaSet) As Global.System.Xml.Schema.XmlSchemaComplexType
+            Dim type As Global.System.Xml.Schema.XmlSchemaComplexType = New Global.System.Xml.Schema.XmlSchemaComplexType()
+            Dim sequence As Global.System.Xml.Schema.XmlSchemaSequence = New Global.System.Xml.Schema.XmlSchemaSequence()
+            Dim ds As PokemonDataSet = New PokemonDataSet()
+            Dim any1 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any1.Namespace = "http://www.w3.org/2001/XMLSchema"
+            any1.MinOccurs = New Decimal(0)
+            any1.MaxOccurs = Decimal.MaxValue
+            any1.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any1)
+            Dim any2 As Global.System.Xml.Schema.XmlSchemaAny = New Global.System.Xml.Schema.XmlSchemaAny()
+            any2.Namespace = "urn:schemas-microsoft-com:xml-diffgram-v1"
+            any2.MinOccurs = New Decimal(1)
+            any2.ProcessContents = Global.System.Xml.Schema.XmlSchemaContentProcessing.Lax
+            sequence.Items.Add(any2)
+            Dim attribute1 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute1.Name = "namespace"
+            attribute1.FixedValue = ds.Namespace
+            type.Attributes.Add(attribute1)
+            Dim attribute2 As Global.System.Xml.Schema.XmlSchemaAttribute = New Global.System.Xml.Schema.XmlSchemaAttribute()
+            attribute2.Name = "tableTypeName"
+            attribute2.FixedValue = "typingDataTable"
+            type.Attributes.Add(attribute2)
+            type.Particle = sequence
+            Dim dsSchema As Global.System.Xml.Schema.XmlSchema = ds.GetSchemaSerializable
+            If xs.Contains(dsSchema.TargetNamespace) Then
+                Dim s1 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Dim s2 As Global.System.IO.MemoryStream = New Global.System.IO.MemoryStream()
+                Try 
+                    Dim schema As Global.System.Xml.Schema.XmlSchema = Nothing
+                    dsSchema.Write(s1)
+                    Dim schemas As Global.System.Collections.IEnumerator = xs.Schemas(dsSchema.TargetNamespace).GetEnumerator
+                    Do While schemas.MoveNext
+                        schema = CType(schemas.Current,Global.System.Xml.Schema.XmlSchema)
+                        s2.SetLength(0)
+                        schema.Write(s2)
+                        If (s1.Length = s2.Length) Then
+                            s1.Position = 0
+                            s2.Position = 0
+                            
+                            Do While ((s1.Position <> s1.Length)  _
+                                        AndAlso (s1.ReadByte = s2.ReadByte))
+                                
+                                
+                            Loop
+                            If (s1.Position = s1.Length) Then
+                                Return type
+                            End If
+                        End If
+                        
+                    Loop
+                Finally
+                    If (Not (s1) Is Nothing) Then
+                        s1.Close
+                    End If
+                    If (Not (s2) Is Nothing) Then
+                        s2.Close
+                    End If
+                End Try
+            End If
+            xs.Add(dsSchema)
+            Return type
+        End Function
+    End Class
     
     '''<summary>
     '''Represents the strongly named DataTable class.
@@ -322,7 +637,7 @@ Partial Public Class PokemonDataSet
         
         Private columnname As Global.System.Data.DataColumn
         
-        Private columntyping As Global.System.Data.DataColumn
+        Private columntypeid As Global.System.Data.DataColumn
         
         Private columnability As Global.System.Data.DataColumn
         
@@ -387,9 +702,9 @@ Partial Public Class PokemonDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property typingColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property typeidColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columntyping
+                Return Me.columntypeid
             End Get
         End Property
         
@@ -470,9 +785,12 @@ Partial Public Class PokemonDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddPokemonRow(ByVal ID As Integer, ByVal name As String, ByVal typing As String, ByVal ability As String, ByVal move1 As String, ByVal move2 As String, ByVal move3 As String, ByVal move4 As String) As PokemonRow
+        Public Overloads Function AddPokemonRow(ByVal ID As Integer, ByVal name As String, ByVal parenttypingRowBytyping_Pokemon As typingRow, ByVal ability As String, ByVal move1 As String, ByVal move2 As String, ByVal move3 As String, ByVal move4 As String) As PokemonRow
             Dim rowPokemonRow As PokemonRow = CType(Me.NewRow,PokemonRow)
-            Dim columnValuesArray() As Object = New Object() {ID, name, typing, ability, move1, move2, move3, move4}
+            Dim columnValuesArray() As Object = New Object() {ID, name, Nothing, ability, move1, move2, move3, move4}
+            If (Not (parenttypingRowBytyping_Pokemon) Is Nothing) Then
+                columnValuesArray(2) = parenttypingRowBytyping_Pokemon(0)
+            End If
             rowPokemonRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowPokemonRow)
             Return rowPokemonRow
@@ -503,7 +821,7 @@ Partial Public Class PokemonDataSet
         Friend Sub InitVars()
             Me.columnID = MyBase.Columns("ID")
             Me.columnname = MyBase.Columns("name")
-            Me.columntyping = MyBase.Columns("typing")
+            Me.columntypeid = MyBase.Columns("typeid")
             Me.columnability = MyBase.Columns("ability")
             Me.columnmove1 = MyBase.Columns("move1")
             Me.columnmove2 = MyBase.Columns("move2")
@@ -518,8 +836,8 @@ Partial Public Class PokemonDataSet
             MyBase.Columns.Add(Me.columnID)
             Me.columnname = New Global.System.Data.DataColumn("name", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnname)
-            Me.columntyping = New Global.System.Data.DataColumn("typing", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columntyping)
+            Me.columntypeid = New Global.System.Data.DataColumn("typeid", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columntypeid)
             Me.columnability = New Global.System.Data.DataColumn("ability", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnability)
             Me.columnmove1 = New Global.System.Data.DataColumn("move1", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -535,8 +853,7 @@ Partial Public Class PokemonDataSet
             Me.columnID.Unique = true
             Me.columnname.AllowDBNull = false
             Me.columnname.MaxLength = 50
-            Me.columntyping.AllowDBNull = false
-            Me.columntyping.MaxLength = 75
+            Me.columntypeid.AllowDBNull = false
             Me.columnability.AllowDBNull = false
             Me.columnability.MaxLength = 75
             Me.columnmove1.AllowDBNull = false
@@ -688,7 +1005,7 @@ Partial Public Class PokemonDataSet
         
         Private columnname As Global.System.Data.DataColumn
         
-        Private columntyping As Global.System.Data.DataColumn
+        Private columntypeid As Global.System.Data.DataColumn
         
         Private columnability As Global.System.Data.DataColumn
         
@@ -753,9 +1070,9 @@ Partial Public Class PokemonDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public ReadOnly Property typingColumn() As Global.System.Data.DataColumn
+        Public ReadOnly Property typeidColumn() As Global.System.Data.DataColumn
             Get
-                Return Me.columntyping
+                Return Me.columntypeid
             End Get
         End Property
         
@@ -836,9 +1153,9 @@ Partial Public Class PokemonDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Overloads Function AddteamRow(ByVal ID As Integer, ByVal name As String, ByVal typing As String, ByVal ability As String, ByVal move1 As String, ByVal move2 As String, ByVal move3 As String, ByVal move4 As String) As teamRow
+        Public Overloads Function AddteamRow(ByVal ID As Integer, ByVal name As String, ByVal typeid As Integer, ByVal ability As String, ByVal move1 As String, ByVal move2 As String, ByVal move3 As String, ByVal move4 As String) As teamRow
             Dim rowteamRow As teamRow = CType(Me.NewRow,teamRow)
-            Dim columnValuesArray() As Object = New Object() {ID, name, typing, ability, move1, move2, move3, move4}
+            Dim columnValuesArray() As Object = New Object() {ID, name, typeid, ability, move1, move2, move3, move4}
             rowteamRow.ItemArray = columnValuesArray
             Me.Rows.Add(rowteamRow)
             Return rowteamRow
@@ -869,7 +1186,7 @@ Partial Public Class PokemonDataSet
         Friend Sub InitVars()
             Me.columnID = MyBase.Columns("ID")
             Me.columnname = MyBase.Columns("name")
-            Me.columntyping = MyBase.Columns("typing")
+            Me.columntypeid = MyBase.Columns("typeid")
             Me.columnability = MyBase.Columns("ability")
             Me.columnmove1 = MyBase.Columns("move1")
             Me.columnmove2 = MyBase.Columns("move2")
@@ -884,8 +1201,8 @@ Partial Public Class PokemonDataSet
             MyBase.Columns.Add(Me.columnID)
             Me.columnname = New Global.System.Data.DataColumn("name", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnname)
-            Me.columntyping = New Global.System.Data.DataColumn("typing", GetType(String), Nothing, Global.System.Data.MappingType.Element)
-            MyBase.Columns.Add(Me.columntyping)
+            Me.columntypeid = New Global.System.Data.DataColumn("typeid", GetType(Integer), Nothing, Global.System.Data.MappingType.Element)
+            MyBase.Columns.Add(Me.columntypeid)
             Me.columnability = New Global.System.Data.DataColumn("ability", GetType(String), Nothing, Global.System.Data.MappingType.Element)
             MyBase.Columns.Add(Me.columnability)
             Me.columnmove1 = New Global.System.Data.DataColumn("move1", GetType(String), Nothing, Global.System.Data.MappingType.Element)
@@ -901,8 +1218,7 @@ Partial Public Class PokemonDataSet
             Me.columnID.Unique = true
             Me.columnname.AllowDBNull = false
             Me.columnname.MaxLength = 50
-            Me.columntyping.AllowDBNull = false
-            Me.columntyping.MaxLength = 75
+            Me.columntypeid.AllowDBNull = false
             Me.columnability.AllowDBNull = false
             Me.columnability.MaxLength = 75
             Me.columnmove1.AllowDBNull = false
@@ -1045,6 +1361,70 @@ Partial Public Class PokemonDataSet
     '''<summary>
     '''Represents strongly named DataRow class.
     '''</summary>
+    Partial Public Class typingRow
+        Inherits Global.System.Data.DataRow
+        
+        Private tabletyping As typingDataTable
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Sub New(ByVal rb As Global.System.Data.DataRowBuilder)
+            MyBase.New(rb)
+            Me.tabletyping = CType(Me.Table,typingDataTable)
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property typeId() As Integer
+            Get
+                Return CType(Me(Me.tabletyping.typeIdColumn),Integer)
+            End Get
+            Set
+                Me(Me.tabletyping.typeIdColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property typing() As String
+            Get
+                Try 
+                    Return CType(Me(Me.tabletyping.typingColumn),String)
+                Catch e As Global.System.InvalidCastException
+                    Throw New Global.System.Data.StrongTypingException("The value for column 'typing' in table 'typing' is DBNull.", e)
+                End Try
+            End Get
+            Set
+                Me(Me.tabletyping.typingColumn) = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function IstypingNull() As Boolean
+            Return Me.IsNull(Me.tabletyping.typingColumn)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub SettypingNull()
+            Me(Me.tabletyping.typingColumn) = Global.System.Convert.DBNull
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Function GetPokemonRows() As PokemonRow()
+            If (Me.Table.ChildRelations("typing_Pokemon") Is Nothing) Then
+                Return New PokemonRow(-1) {}
+            Else
+                Return CType(MyBase.GetChildRows(Me.Table.ChildRelations("typing_Pokemon")),PokemonRow())
+            End If
+        End Function
+    End Class
+    
+    '''<summary>
+    '''Represents strongly named DataRow class.
+    '''</summary>
     Partial Public Class PokemonRow
         Inherits Global.System.Data.DataRow
         
@@ -1081,12 +1461,12 @@ Partial Public Class PokemonDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property typing() As String
+        Public Property typeid() As Integer
             Get
-                Return CType(Me(Me.tablePokemon.typingColumn),String)
+                Return CType(Me(Me.tablePokemon.typeidColumn),Integer)
             End Get
             Set
-                Me(Me.tablePokemon.typingColumn) = value
+                Me(Me.tablePokemon.typeidColumn) = value
             End Set
         End Property
         
@@ -1144,6 +1524,17 @@ Partial Public Class PokemonDataSet
                 Me(Me.tablePokemon.move4Column) = value
             End Set
         End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property typingRow() As typingRow
+            Get
+                Return CType(Me.GetParentRow(Me.Table.ParentRelations("typing_Pokemon")),typingRow)
+            End Get
+            Set
+                Me.SetParentRow(value, Me.Table.ParentRelations("typing_Pokemon"))
+            End Set
+        End Property
     End Class
     
     '''<summary>
@@ -1185,12 +1576,12 @@ Partial Public Class PokemonDataSet
         
         <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
-        Public Property typing() As String
+        Public Property typeid() As Integer
             Get
-                Return CType(Me(Me.tableteam.typingColumn),String)
+                Return CType(Me(Me.tableteam.typeidColumn),Integer)
             End Get
             Set
-                Me(Me.tableteam.typingColumn) = value
+                Me(Me.tableteam.typeidColumn) = value
             End Set
         End Property
         
@@ -1247,6 +1638,42 @@ Partial Public Class PokemonDataSet
             Set
                 Me(Me.tableteam.move4Column) = value
             End Set
+        End Property
+    End Class
+    
+    '''<summary>
+    '''Row event argument class
+    '''</summary>
+    <Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+    Public Class typingRowChangeEvent
+        Inherits Global.System.EventArgs
+        
+        Private eventRow As typingRow
+        
+        Private eventAction As Global.System.Data.DataRowAction
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New(ByVal row As typingRow, ByVal action As Global.System.Data.DataRowAction)
+            MyBase.New
+            Me.eventRow = row
+            Me.eventAction = action
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Row() As typingRow
+            Get
+                Return Me.eventRow
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public ReadOnly Property Action() As Global.System.Data.DataRowAction
+            Get
+                Return Me.eventAction
+            End Get
         End Property
     End Class
     
@@ -1324,6 +1751,331 @@ Partial Public Class PokemonDataSet
 End Class
 
 Namespace PokemonDataSetTableAdapters
+    
+    '''<summary>
+    '''Represents the connection and commands used to retrieve and save data.
+    '''</summary>
+    <Global.System.ComponentModel.DesignerCategoryAttribute("code"),  _
+     Global.System.ComponentModel.ToolboxItem(true),  _
+     Global.System.ComponentModel.DataObjectAttribute(true),  _
+     Global.System.ComponentModel.DesignerAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterDesigner, Microsoft.VSDesigner"& _ 
+        ", Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"),  _
+     Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+    Partial Public Class typingTableAdapter
+        Inherits Global.System.ComponentModel.Component
+        
+        Private WithEvents _adapter As Global.System.Data.SqlClient.SqlDataAdapter
+        
+        Private _connection As Global.System.Data.SqlClient.SqlConnection
+        
+        Private _transaction As Global.System.Data.SqlClient.SqlTransaction
+        
+        Private _commandCollection() As Global.System.Data.SqlClient.SqlCommand
+        
+        Private _clearBeforeFill As Boolean
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Sub New()
+            MyBase.New
+            Me.ClearBeforeFill = true
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected Friend ReadOnly Property Adapter() As Global.System.Data.SqlClient.SqlDataAdapter
+            Get
+                If (Me._adapter Is Nothing) Then
+                    Me.InitAdapter
+                End If
+                Return Me._adapter
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Property Connection() As Global.System.Data.SqlClient.SqlConnection
+            Get
+                If (Me._connection Is Nothing) Then
+                    Me.InitConnection
+                End If
+                Return Me._connection
+            End Get
+            Set
+                Me._connection = value
+                If (Not (Me.Adapter.InsertCommand) Is Nothing) Then
+                    Me.Adapter.InsertCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.DeleteCommand) Is Nothing) Then
+                    Me.Adapter.DeleteCommand.Connection = value
+                End If
+                If (Not (Me.Adapter.UpdateCommand) Is Nothing) Then
+                    Me.Adapter.UpdateCommand.Connection = value
+                End If
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    If (Not (Me.CommandCollection(i)) Is Nothing) Then
+                        CType(Me.CommandCollection(i),Global.System.Data.SqlClient.SqlCommand).Connection = value
+                    End If
+                    i = (i + 1)
+                Loop
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Friend Property Transaction() As Global.System.Data.SqlClient.SqlTransaction
+            Get
+                Return Me._transaction
+            End Get
+            Set
+                Me._transaction = value
+                Dim i As Integer = 0
+                Do While (i < Me.CommandCollection.Length)
+                    Me.CommandCollection(i).Transaction = Me._transaction
+                    i = (i + 1)
+                Loop
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.DeleteCommand) Is Nothing)) Then
+                    Me.Adapter.DeleteCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.InsertCommand) Is Nothing)) Then
+                    Me.Adapter.InsertCommand.Transaction = Me._transaction
+                End If
+                If ((Not (Me.Adapter) Is Nothing)  _
+                            AndAlso (Not (Me.Adapter.UpdateCommand) Is Nothing)) Then
+                    Me.Adapter.UpdateCommand.Transaction = Me._transaction
+                End If
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Protected ReadOnly Property CommandCollection() As Global.System.Data.SqlClient.SqlCommand()
+            Get
+                If (Me._commandCollection Is Nothing) Then
+                    Me.InitCommandCollection
+                End If
+                Return Me._commandCollection
+            End Get
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Public Property ClearBeforeFill() As Boolean
+            Get
+                Return Me._clearBeforeFill
+            End Get
+            Set
+                Me._clearBeforeFill = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitAdapter()
+            Me._adapter = New Global.System.Data.SqlClient.SqlDataAdapter()
+            Dim tableMapping As Global.System.Data.Common.DataTableMapping = New Global.System.Data.Common.DataTableMapping()
+            tableMapping.SourceTable = "Table"
+            tableMapping.DataSetTable = "typing"
+            tableMapping.ColumnMappings.Add("typeId", "typeId")
+            tableMapping.ColumnMappings.Add("typing", "typing")
+            Me._adapter.TableMappings.Add(tableMapping)
+            Me._adapter.DeleteCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.DeleteCommand.Connection = Me.Connection
+            Me._adapter.DeleteCommand.CommandText = "DELETE FROM [dbo].[typing] WHERE (([typeId] = @Original_typeId) AND ((@IsNull_typ"& _ 
+                "ing = 1 AND [typing] IS NULL) OR ([typing] = @Original_typing)))"
+            Me._adapter.DeleteCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_typeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typeId", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_typing", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typing", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_typing", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typing", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.InsertCommand.Connection = Me.Connection
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[typing] ([typeId], [typing]) VALUES (@typeId, @typing);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELEC"& _ 
+                "T typeId, typing FROM typing WHERE (typeId = @typeId)"
+            Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@typeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typeId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@typing", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typing", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
+            Me._adapter.UpdateCommand.Connection = Me.Connection
+            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[typing] SET [typeId] = @typeId, [typing] = @typing WHERE (([typeId]"& _ 
+                " = @Original_typeId) AND ((@IsNull_typing = 1 AND [typing] IS NULL) OR ([typing]"& _ 
+                " = @Original_typing)));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT typeId, typing FROM typing WHERE (typeId = @type"& _ 
+                "Id)"
+            Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@typeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typeId", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@typing", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typing", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_typeId", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typeId", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@IsNull_typing", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typing", Global.System.Data.DataRowVersion.Original, true, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_typing", Global.System.Data.SqlDbType.NChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typing", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitConnection()
+            Me._connection = New Global.System.Data.SqlClient.SqlConnection()
+            Me._connection.ConnectionString = Global.final_project.My.MySettings.Default.PokemonConnectionString
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
+        Private Sub InitCommandCollection()
+            Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
+            Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
+            Me._commandCollection(0).Connection = Me.Connection
+            Me._commandCollection(0).CommandText = "SELECT typeId, typing FROM dbo.typing"
+            Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
+        End Sub
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Fill, true)>  _
+        Public Overloads Overridable Function Fill(ByVal dataTable As PokemonDataSet.typingDataTable) As Integer
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            If (Me.ClearBeforeFill = true) Then
+                dataTable.Clear
+            End If
+            Dim returnValue As Integer = Me.Adapter.Fill(dataTable)
+            Return returnValue
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.[Select], true)>  _
+        Public Overloads Overridable Function GetData() As PokemonDataSet.typingDataTable
+            Me.Adapter.SelectCommand = Me.CommandCollection(0)
+            Dim dataTable As PokemonDataSet.typingDataTable = New PokemonDataSet.typingDataTable()
+            Me.Adapter.Fill(dataTable)
+            Return dataTable
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataTable As PokemonDataSet.typingDataTable) As Integer
+            Return Me.Adapter.Update(dataTable)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataSet As PokemonDataSet) As Integer
+            Return Me.Adapter.Update(dataSet, "typing")
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRow As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(New Global.System.Data.DataRow() {dataRow})
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter")>  _
+        Public Overloads Overridable Function Update(ByVal dataRows() As Global.System.Data.DataRow) As Integer
+            Return Me.Adapter.Update(dataRows)
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Delete, true)>  _
+        Public Overloads Overridable Function Delete(ByVal Original_typeId As Integer, ByVal Original_typing As String) As Integer
+            Me.Adapter.DeleteCommand.Parameters(0).Value = CType(Original_typeId,Integer)
+            If (Original_typing Is Nothing) Then
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(1,Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.DeleteCommand.Parameters(1).Value = CType(0,Object)
+                Me.Adapter.DeleteCommand.Parameters(2).Value = CType(Original_typing,String)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.DeleteCommand.Connection.State
+            If ((Me.Adapter.DeleteCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.DeleteCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.DeleteCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.DeleteCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
+        Public Overloads Overridable Function Insert(ByVal typeId As Integer, ByVal typing As String) As Integer
+            Me.Adapter.InsertCommand.Parameters(0).Value = CType(typeId,Integer)
+            If (typing Is Nothing) Then
+                Me.Adapter.InsertCommand.Parameters(1).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.InsertCommand.Parameters(1).Value = CType(typing,String)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.InsertCommand.Connection.State
+            If ((Me.Adapter.InsertCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.InsertCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.InsertCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.InsertCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal typeId As Integer, ByVal typing As String, ByVal Original_typeId As Integer, ByVal Original_typing As String) As Integer
+            Me.Adapter.UpdateCommand.Parameters(0).Value = CType(typeId,Integer)
+            If (typing Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(1).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(1).Value = CType(typing,String)
+            End If
+            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(Original_typeId,Integer)
+            If (Original_typing Is Nothing) Then
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(1,Object)
+                Me.Adapter.UpdateCommand.Parameters(4).Value = Global.System.DBNull.Value
+            Else
+                Me.Adapter.UpdateCommand.Parameters(3).Value = CType(0,Object)
+                Me.Adapter.UpdateCommand.Parameters(4).Value = CType(Original_typing,String)
+            End If
+            Dim previousConnectionState As Global.System.Data.ConnectionState = Me.Adapter.UpdateCommand.Connection.State
+            If ((Me.Adapter.UpdateCommand.Connection.State And Global.System.Data.ConnectionState.Open)  _
+                        <> Global.System.Data.ConnectionState.Open) Then
+                Me.Adapter.UpdateCommand.Connection.Open
+            End If
+            Try 
+                Dim returnValue As Integer = Me.Adapter.UpdateCommand.ExecuteNonQuery
+                Return returnValue
+            Finally
+                If (previousConnectionState = Global.System.Data.ConnectionState.Closed) Then
+                    Me.Adapter.UpdateCommand.Connection.Close
+                End If
+            End Try
+        End Function
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
+         Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
+        Public Overloads Overridable Function Update(ByVal typing As String, ByVal Original_typeId As Integer, ByVal Original_typing As String) As Integer
+            Return Me.Update(Original_typeId, typing, Original_typeId, Original_typing)
+        End Function
+    End Class
     
     '''<summary>
     '''Represents the connection and commands used to retrieve and save data.
@@ -1454,7 +2206,7 @@ Namespace PokemonDataSetTableAdapters
             tableMapping.DataSetTable = "Pokemon"
             tableMapping.ColumnMappings.Add("ID", "ID")
             tableMapping.ColumnMappings.Add("name", "name")
-            tableMapping.ColumnMappings.Add("typing", "typing")
+            tableMapping.ColumnMappings.Add("typeid", "typeid")
             tableMapping.ColumnMappings.Add("ability", "ability")
             tableMapping.ColumnMappings.Add("move1", "move1")
             tableMapping.ColumnMappings.Add("move2", "move2")
@@ -1468,14 +2220,14 @@ Namespace PokemonDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ID", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Pokemon] ([ID], [name], [typing], [ability], [move1], [move2],"& _ 
-                " [move3], [move4]) VALUES (@ID, @name, @typing, @ability, @move1, @move2, @move3"& _ 
-                ", @move4);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ID, name, typing, ability, move1, move2, move3, move4 FROM Po"& _ 
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[Pokemon] ([ID], [name], [typeid], [ability], [move1], [move2],"& _ 
+                " [move3], [move4]) VALUES (@ID, @name, @typeid, @ability, @move1, @move2, @move3"& _ 
+                ", @move4);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ID, name, typeid, ability, move1, move2, move3, move4 FROM Po"& _ 
                 "kemon WHERE (ID = @ID)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@typing", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typing", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@typeid", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typeid", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ability", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ability", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@move1", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@move2", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -1484,7 +2236,7 @@ Namespace PokemonDataSetTableAdapters
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
             Me._adapter.UpdateCommand.CommandText = "UPDATE Pokemon"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SET          ability = @ability, move1 = @move1, move2 = @move2, "& _ 
-                "move3 = @move3, move4 = @move4"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE  (ID = @ID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ID, name, typing, ab"& _ 
+                "move3 = @move3, move4 = @move4"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"WHERE  (ID = @ID); "&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ID, name, typeid, ab"& _ 
                 "ility, move1, move2, move3, move4 FROM Pokemon WHERE (ID = @ID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ability", Global.System.Data.SqlDbType.NVarChar, 75, Global.System.Data.ParameterDirection.Input, 0, 0, "ability", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -1508,7 +2260,7 @@ Namespace PokemonDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT ID, name, typing, ability, move1, move2, move3, move4"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"FROM     Pokemon"
+            Me._commandCollection(0).CommandText = "SELECT ID, name, typeid, ability, move1, move2, move3, move4 FROM dbo.Pokemon"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -1589,18 +2341,14 @@ Namespace PokemonDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal ID As Integer, ByVal name As String, ByVal typing As String, ByVal ability As String, ByVal move1 As String, ByVal move2 As String, ByVal move3 As String, ByVal move4 As String) As Integer
+        Public Overloads Overridable Function Insert(ByVal ID As Integer, ByVal name As String, ByVal typeid As Integer, ByVal ability As String, ByVal move1 As String, ByVal move2 As String, ByVal move3 As String, ByVal move4 As String) As Integer
             Me.Adapter.InsertCommand.Parameters(0).Value = CType(ID,Integer)
             If (name Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("name")
             Else
                 Me.Adapter.InsertCommand.Parameters(1).Value = CType(name,String)
             End If
-            If (typing Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("typing")
-            Else
-                Me.Adapter.InsertCommand.Parameters(2).Value = CType(typing,String)
-            End If
+            Me.Adapter.InsertCommand.Parameters(2).Value = CType(typeid,Integer)
             If (ability Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("ability")
             Else
@@ -1817,7 +2565,7 @@ Namespace PokemonDataSetTableAdapters
             tableMapping.DataSetTable = "team"
             tableMapping.ColumnMappings.Add("ID", "ID")
             tableMapping.ColumnMappings.Add("name", "name")
-            tableMapping.ColumnMappings.Add("typing", "typing")
+            tableMapping.ColumnMappings.Add("typeid", "typeid")
             tableMapping.ColumnMappings.Add("ability", "ability")
             tableMapping.ColumnMappings.Add("move1", "move1")
             tableMapping.ColumnMappings.Add("move2", "move2")
@@ -1831,14 +2579,14 @@ Namespace PokemonDataSetTableAdapters
             Me._adapter.DeleteCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ID", Global.System.Data.SqlDbType.Int, 4, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.InsertCommand.Connection = Me.Connection
-            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[team] ([ID], [name], [typing], [ability], [move1], [move2], [m"& _ 
-                "ove3], [move4]) VALUES (@ID, @name, @typing, @ability, @move1, @move2, @move3, @"& _ 
-                "move4);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ID, name, typing, ability, move1, move2, move3, move4 FROM team "& _ 
+            Me._adapter.InsertCommand.CommandText = "INSERT INTO [dbo].[team] ([ID], [name], [typeid], [ability], [move1], [move2], [m"& _ 
+                "ove3], [move4]) VALUES (@ID, @name, @typeid, @ability, @move1, @move2, @move3, @"& _ 
+                "move4);"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ID, name, typeid, ability, move1, move2, move3, move4 FROM team "& _ 
                 "WHERE (ID = @ID)"
             Me._adapter.InsertCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@typing", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typing", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@typeid", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typeid", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ability", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ability", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@move1", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@move2", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -1846,17 +2594,17 @@ Namespace PokemonDataSetTableAdapters
             Me._adapter.InsertCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@move4", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move4", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand = New Global.System.Data.SqlClient.SqlCommand()
             Me._adapter.UpdateCommand.Connection = Me.Connection
-            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[team] SET [ID] = @ID, [name] = @name, [typing] = @typing, [ability]"& _ 
+            Me._adapter.UpdateCommand.CommandText = "UPDATE [dbo].[team] SET [ID] = @ID, [name] = @name, [typeid] = @typeid, [ability]"& _ 
                 " = @ability, [move1] = @move1, [move2] = @move2, [move3] = @move3, [move4] = @mo"& _ 
-                "ve4 WHERE (([ID] = @Original_ID) AND ([name] = @Original_name) AND ([typing] = @"& _ 
-                "Original_typing) AND ([ability] = @Original_ability) AND ([move1] = @Original_mo"& _ 
+                "ve4 WHERE (([ID] = @Original_ID) AND ([name] = @Original_name) AND ([typeid] = @"& _ 
+                "Original_typeid) AND ([ability] = @Original_ability) AND ([move1] = @Original_mo"& _ 
                 "ve1) AND ([move2] = @Original_move2) AND ([move3] = @Original_move3) AND ([move4"& _ 
-                "] = @Original_move4));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ID, name, typing, ability, move1, move2, move3, m"& _ 
+                "] = @Original_move4));"&Global.Microsoft.VisualBasic.ChrW(13)&Global.Microsoft.VisualBasic.ChrW(10)&"SELECT ID, name, typeid, ability, move1, move2, move3, m"& _ 
                 "ove4 FROM team WHERE (ID = @ID)"
             Me._adapter.UpdateCommand.CommandType = Global.System.Data.CommandType.Text
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "name", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@typing", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typing", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@typeid", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typeid", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@ability", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ability", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@move1", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move1", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@move2", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move2", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
@@ -1864,7 +2612,7 @@ Namespace PokemonDataSetTableAdapters
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@move4", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move4", Global.System.Data.DataRowVersion.Current, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ID", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ID", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_name", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "name", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
-            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_typing", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typing", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
+            Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_typeid", Global.System.Data.SqlDbType.Int, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "typeid", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_ability", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "ability", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_move1", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move1", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
             Me._adapter.UpdateCommand.Parameters.Add(New Global.System.Data.SqlClient.SqlParameter("@Original_move2", Global.System.Data.SqlDbType.NVarChar, 0, Global.System.Data.ParameterDirection.Input, 0, 0, "move2", Global.System.Data.DataRowVersion.Original, false, Nothing, "", "", ""))
@@ -1885,7 +2633,7 @@ Namespace PokemonDataSetTableAdapters
             Me._commandCollection = New Global.System.Data.SqlClient.SqlCommand(0) {}
             Me._commandCollection(0) = New Global.System.Data.SqlClient.SqlCommand()
             Me._commandCollection(0).Connection = Me.Connection
-            Me._commandCollection(0).CommandText = "SELECT ID, name, typing, ability, move1, move2, move3, move4 FROM dbo.team"
+            Me._commandCollection(0).CommandText = "SELECT ID, name, typeid, ability, move1, move2, move3, move4 FROM dbo.team"
             Me._commandCollection(0).CommandType = Global.System.Data.CommandType.Text
         End Sub
         
@@ -1966,18 +2714,14 @@ Namespace PokemonDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Insert, true)>  _
-        Public Overloads Overridable Function Insert(ByVal ID As Integer, ByVal name As String, ByVal typing As String, ByVal ability As String, ByVal move1 As String, ByVal move2 As String, ByVal move3 As String, ByVal move4 As String) As Integer
+        Public Overloads Overridable Function Insert(ByVal ID As Integer, ByVal name As String, ByVal typeid As Integer, ByVal ability As String, ByVal move1 As String, ByVal move2 As String, ByVal move3 As String, ByVal move4 As String) As Integer
             Me.Adapter.InsertCommand.Parameters(0).Value = CType(ID,Integer)
             If (name Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("name")
             Else
                 Me.Adapter.InsertCommand.Parameters(1).Value = CType(name,String)
             End If
-            If (typing Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("typing")
-            Else
-                Me.Adapter.InsertCommand.Parameters(2).Value = CType(typing,String)
-            End If
+            Me.Adapter.InsertCommand.Parameters(2).Value = CType(typeid,Integer)
             If (ability Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("ability")
             Else
@@ -2025,7 +2769,7 @@ Namespace PokemonDataSetTableAdapters
         Public Overloads Overridable Function Update( _
                     ByVal ID As Integer,  _
                     ByVal name As String,  _
-                    ByVal typing As String,  _
+                    ByVal typeid As Integer,  _
                     ByVal ability As String,  _
                     ByVal move1 As String,  _
                     ByVal move2 As String,  _
@@ -2033,7 +2777,7 @@ Namespace PokemonDataSetTableAdapters
                     ByVal move4 As String,  _
                     ByVal Original_ID As Integer,  _
                     ByVal Original_name As String,  _
-                    ByVal Original_typing As String,  _
+                    ByVal Original_typeid As Integer,  _
                     ByVal Original_ability As String,  _
                     ByVal Original_move1 As String,  _
                     ByVal Original_move2 As String,  _
@@ -2045,11 +2789,7 @@ Namespace PokemonDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(1).Value = CType(name,String)
             End If
-            If (typing Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("typing")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(2).Value = CType(typing,String)
-            End If
+            Me.Adapter.UpdateCommand.Parameters(2).Value = CType(typeid,Integer)
             If (ability Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("ability")
             Else
@@ -2081,11 +2821,7 @@ Namespace PokemonDataSetTableAdapters
             Else
                 Me.Adapter.UpdateCommand.Parameters(9).Value = CType(Original_name,String)
             End If
-            If (Original_typing Is Nothing) Then
-                Throw New Global.System.ArgumentNullException("Original_typing")
-            Else
-                Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_typing,String)
-            End If
+            Me.Adapter.UpdateCommand.Parameters(10).Value = CType(Original_typeid,Integer)
             If (Original_ability Is Nothing) Then
                 Throw New Global.System.ArgumentNullException("Original_ability")
             Else
@@ -2130,8 +2866,8 @@ Namespace PokemonDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
          Global.System.ComponentModel.Design.HelpKeywordAttribute("vs.data.TableAdapter"),  _
          Global.System.ComponentModel.DataObjectMethodAttribute(Global.System.ComponentModel.DataObjectMethodType.Update, true)>  _
-        Public Overloads Overridable Function Update(ByVal name As String, ByVal typing As String, ByVal ability As String, ByVal move1 As String, ByVal move2 As String, ByVal move3 As String, ByVal move4 As String, ByVal Original_ID As Integer, ByVal Original_name As String, ByVal Original_typing As String, ByVal Original_ability As String, ByVal Original_move1 As String, ByVal Original_move2 As String, ByVal Original_move3 As String, ByVal Original_move4 As String) As Integer
-            Return Me.Update(Original_ID, name, typing, ability, move1, move2, move3, move4, Original_ID, Original_name, Original_typing, Original_ability, Original_move1, Original_move2, Original_move3, Original_move4)
+        Public Overloads Overridable Function Update(ByVal name As String, ByVal typeid As Integer, ByVal ability As String, ByVal move1 As String, ByVal move2 As String, ByVal move3 As String, ByVal move4 As String, ByVal Original_ID As Integer, ByVal Original_name As String, ByVal Original_typeid As Integer, ByVal Original_ability As String, ByVal Original_move1 As String, ByVal Original_move2 As String, ByVal Original_move3 As String, ByVal Original_move4 As String) As Integer
+            Return Me.Update(Original_ID, name, typeid, ability, move1, move2, move3, move4, Original_ID, Original_name, Original_typeid, Original_ability, Original_move1, Original_move2, Original_move3, Original_move4)
         End Function
     End Class
     
@@ -2147,6 +2883,8 @@ Namespace PokemonDataSetTableAdapters
         Inherits Global.System.ComponentModel.Component
         
         Private _updateOrder As UpdateOrderOption
+        
+        Private _typingTableAdapter As typingTableAdapter
         
         Private _pokemonTableAdapter As PokemonTableAdapter
         
@@ -2164,6 +2902,20 @@ Namespace PokemonDataSetTableAdapters
             End Get
             Set
                 Me._updateOrder = value
+            End Set
+        End Property
+        
+        <Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
+         Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0"),  _
+         Global.System.ComponentModel.EditorAttribute("Microsoft.VSDesigner.DataSource.Design.TableAdapterManagerPropertyEditor, Microso"& _ 
+            "ft.VSDesigner, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3"& _ 
+            "a", "System.Drawing.Design.UITypeEditor")>  _
+        Public Property typingTableAdapter() As typingTableAdapter
+            Get
+                Return Me._typingTableAdapter
+            End Get
+            Set
+                Me._typingTableAdapter = value
             End Set
         End Property
         
@@ -2214,6 +2966,10 @@ Namespace PokemonDataSetTableAdapters
                 If (Not (Me._connection) Is Nothing) Then
                     Return Me._connection
                 End If
+                If ((Not (Me._typingTableAdapter) Is Nothing)  _
+                            AndAlso (Not (Me._typingTableAdapter.Connection) Is Nothing)) Then
+                    Return Me._typingTableAdapter.Connection
+                End If
                 If ((Not (Me._pokemonTableAdapter) Is Nothing)  _
                             AndAlso (Not (Me._pokemonTableAdapter.Connection) Is Nothing)) Then
                     Return Me._pokemonTableAdapter.Connection
@@ -2235,6 +2991,9 @@ Namespace PokemonDataSetTableAdapters
         Public ReadOnly Property TableAdapterInstanceCount() As Integer
             Get
                 Dim count As Integer = 0
+                If (Not (Me._typingTableAdapter) Is Nothing) Then
+                    count = (count + 1)
+                End If
                 If (Not (Me._pokemonTableAdapter) Is Nothing) Then
                     count = (count + 1)
                 End If
@@ -2252,6 +3011,15 @@ Namespace PokemonDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Function UpdateUpdatedRows(ByVal dataSet As PokemonDataSet, ByVal allChangedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow), ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
+            If (Not (Me._typingTableAdapter) Is Nothing) Then
+                Dim updatedRows() As Global.System.Data.DataRow = dataSet.typing.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
+                updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
+                If ((Not (updatedRows) Is Nothing)  _
+                            AndAlso (0 < updatedRows.Length)) Then
+                    result = (result + Me._typingTableAdapter.Update(updatedRows))
+                    allChangedRows.AddRange(updatedRows)
+                End If
+            End If
             If (Not (Me._pokemonTableAdapter) Is Nothing) Then
                 Dim updatedRows() As Global.System.Data.DataRow = dataSet.Pokemon.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.ModifiedCurrent)
                 updatedRows = Me.GetRealUpdatedRows(updatedRows, allAddedRows)
@@ -2280,6 +3048,14 @@ Namespace PokemonDataSetTableAdapters
          Global.System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")>  _
         Private Function UpdateInsertedRows(ByVal dataSet As PokemonDataSet, ByVal allAddedRows As Global.System.Collections.Generic.List(Of Global.System.Data.DataRow)) As Integer
             Dim result As Integer = 0
+            If (Not (Me._typingTableAdapter) Is Nothing) Then
+                Dim addedRows() As Global.System.Data.DataRow = dataSet.typing.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
+                If ((Not (addedRows) Is Nothing)  _
+                            AndAlso (0 < addedRows.Length)) Then
+                    result = (result + Me._typingTableAdapter.Update(addedRows))
+                    allAddedRows.AddRange(addedRows)
+                End If
+            End If
             If (Not (Me._pokemonTableAdapter) Is Nothing) Then
                 Dim addedRows() As Global.System.Data.DataRow = dataSet.Pokemon.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Added)
                 If ((Not (addedRows) Is Nothing)  _
@@ -2319,6 +3095,14 @@ Namespace PokemonDataSetTableAdapters
                 If ((Not (deletedRows) Is Nothing)  _
                             AndAlso (0 < deletedRows.Length)) Then
                     result = (result + Me._pokemonTableAdapter.Update(deletedRows))
+                    allChangedRows.AddRange(deletedRows)
+                End If
+            End If
+            If (Not (Me._typingTableAdapter) Is Nothing) Then
+                Dim deletedRows() As Global.System.Data.DataRow = dataSet.typing.Select(Nothing, Nothing, Global.System.Data.DataViewRowState.Deleted)
+                If ((Not (deletedRows) Is Nothing)  _
+                            AndAlso (0 < deletedRows.Length)) Then
+                    result = (result + Me._typingTableAdapter.Update(deletedRows))
                     allChangedRows.AddRange(deletedRows)
                 End If
             End If
@@ -2363,6 +3147,11 @@ Namespace PokemonDataSetTableAdapters
             If (dataSet.HasChanges = false) Then
                 Return 0
             End If
+            If ((Not (Me._typingTableAdapter) Is Nothing)  _
+                        AndAlso (Me.MatchTableAdapterConnection(Me._typingTableAdapter.Connection) = false)) Then
+                Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
+                        "tring.")
+            End If
             If ((Not (Me._pokemonTableAdapter) Is Nothing)  _
                         AndAlso (Me.MatchTableAdapterConnection(Me._pokemonTableAdapter.Connection) = false)) Then
                 Throw New Global.System.ArgumentException("All TableAdapters managed by a TableAdapterManager must use the same connection s"& _ 
@@ -2405,6 +3194,15 @@ Namespace PokemonDataSetTableAdapters
             Try 
                 '---- Prepare for update -----------
                 '
+                If (Not (Me._typingTableAdapter) Is Nothing) Then
+                    revertConnections.Add(Me._typingTableAdapter, Me._typingTableAdapter.Connection)
+                    Me._typingTableAdapter.Connection = CType(workConnection,Global.System.Data.SqlClient.SqlConnection)
+                    Me._typingTableAdapter.Transaction = CType(workTransaction,Global.System.Data.SqlClient.SqlTransaction)
+                    If Me._typingTableAdapter.Adapter.AcceptChangesDuringUpdate Then
+                        Me._typingTableAdapter.Adapter.AcceptChangesDuringUpdate = false
+                        adaptersWithAcceptChangesDuringUpdate.Add(Me._typingTableAdapter.Adapter)
+                    End If
+                End If
                 If (Not (Me._pokemonTableAdapter) Is Nothing) Then
                     revertConnections.Add(Me._pokemonTableAdapter, Me._pokemonTableAdapter.Connection)
                     Me._pokemonTableAdapter.Connection = CType(workConnection,Global.System.Data.SqlClient.SqlConnection)
@@ -2482,6 +3280,10 @@ Namespace PokemonDataSetTableAdapters
             Finally
                 If workConnOpened Then
                     workConnection.Close
+                End If
+                If (Not (Me._typingTableAdapter) Is Nothing) Then
+                    Me._typingTableAdapter.Connection = CType(revertConnections(Me._typingTableAdapter),Global.System.Data.SqlClient.SqlConnection)
+                    Me._typingTableAdapter.Transaction = Nothing
                 End If
                 If (Not (Me._pokemonTableAdapter) Is Nothing) Then
                     Me._pokemonTableAdapter.Connection = CType(revertConnections(Me._pokemonTableAdapter),Global.System.Data.SqlClient.SqlConnection)

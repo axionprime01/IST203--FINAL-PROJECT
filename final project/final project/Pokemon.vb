@@ -11,7 +11,7 @@ Public Class Pokemon
     Public Shared Property LastError As String
     Public Function Insert(ByVal pID As Integer,
                            ByVal pName As String,
-                           ByVal pTyping As String,
+                           ByVal pTypeid As Integer,
                            ByVal pAbility As String,
                            ByVal pMove1 As String,
                            ByVal pMove2 As String,
@@ -21,7 +21,7 @@ Public Class Pokemon
         'if an exception is thrown, last error will hold an error message.
         Try
             LastError = String.Empty
-            adapter.Insert(pID, pName, pTyping, pAbility, pMove1, pMove2, pMove3, pMove4)
+            adapter.Insert(pID, pName, pTypeid, pAbility, pMove1, pMove2, pMove3, pMove4)
             Return True
         Catch ex As Exception
             LastError = ex.Message
@@ -58,5 +58,10 @@ Public Class Pokemon
         Dim table As PokemonDataSet.PokemonDataTable
         table = adapter.GetData()
         Return table.FindByID(Id)
+    End Function
+    Public Function GetByType(ByVal TypeId As Short) As DataTable
+        Dim table As DataTable = adapter.GetData()
+        table.DefaultView.RowFilter = "TypeId = " & TypeId
+        Return table
     End Function
 End Class

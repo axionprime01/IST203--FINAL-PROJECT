@@ -9,7 +9,7 @@
     Public Shared Property LastError As String
     Public Function Insert(ByVal pID As Integer,
                            ByVal pName As String,
-                           ByVal pTyping As String,
+                           ByVal pTypeid As Integer,
                            ByVal pAbility As String,
                            ByVal pMove1 As String,
                            ByVal pMove2 As String,
@@ -19,7 +19,7 @@
         'if an exception is thrown, last error will hold an error message.
         Try
             LastError = String.Empty
-            adapter.Insert(pID, pName, pTyping, pAbility, pMove1, pMove2, pMove3, pMove4)
+            adapter.Insert(pID, pName, pTypeid, pAbility, pMove1, pMove2, pMove3, pMove4)
             Return True
         Catch ex As Exception
             LastError = ex.Message
@@ -36,7 +36,7 @@
         Return rowsAffected > 0
     End Function
     Public Sub deleteteam(ByVal ids As List(Of Integer))
-        'loop throguh array using above delete method
+        'loop through array using above delete method
         For Each id In ids
             Delete(id)
         Next

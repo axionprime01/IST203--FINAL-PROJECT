@@ -130,6 +130,7 @@
       <DependentUpon>PokemonDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="team.vb" />
+    <Compile Include="Type.vb" />
     <Compile Include="updatepokemon.Designer.vb">
       <DependentUpon>updatepokemon.vb</DependentUpon>
     </Compile>

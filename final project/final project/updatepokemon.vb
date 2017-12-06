@@ -12,7 +12,7 @@ Public Class updatepokemon
         row = mPokemon.FindByID(CShort(id))
         lblid.Text = CStr(row.ID)
         lblName.Text = row.name
-        lblTyping.Text = row.typing
+        lblTyping.Text = CStr(row.typeid)
         txtAbility.Text = row.ability
         txtMove1.Text = row.move1
         txtMove2.Text = row.move2

@@ -11,10 +11,10 @@ Public Class PickPokemonForm
     End Sub
 
     Private Sub PickPokemonForm_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-        'TODO: This line of code loads data into the 'PokemonDataSet.Pokemon' table. You can move, or remove it, as needed.
         mPokemon.Pokemonlist.Reset()
+        'TODO: This line of code loads data into the 'PokemonDataSet.Pokemon' table. You can move, or remove it, as needed.
         Me.PokemonTableAdapter.Fill(Me.PokemonDataSet.Pokemon)
-
+        cboType.SelectedIndex = -1
 
     End Sub
     Private Sub btnAddPokemon_Click(sender As Object, e As EventArgs) Handles btnAddPokemon.Click
@@ -24,14 +24,14 @@ Public Class PickPokemonForm
                     index += 1
                     Dim dexID As Short = CShort(dgvPickPokemon.SelectedRows(0).Cells(0).Value)
                     Dim name As String = CStr(dgvPickPokemon.SelectedRows(0).Cells(1).Value)
-                    Dim type As String = CStr(dgvPickPokemon.SelectedRows(0).Cells(2).Value)
+                    Dim typeid As Integer = CInt(dgvPickPokemon.SelectedRows(0).Cells(2).Value)
                     Dim ability As String = CStr(dgvPickPokemon.SelectedRows(0).Cells(3).Value)
                     Dim move1 As String = CStr(dgvPickPokemon.SelectedRows(0).Cells(4).Value)
                     Dim move2 As String = CStr(dgvPickPokemon.SelectedRows(0).Cells(5).Value)
                     Dim move3 As String = CStr(dgvPickPokemon.SelectedRows(0).Cells(6).Value)
                     Dim move4 As String = CStr(dgvPickPokemon.SelectedRows(0).Cells(7).Value)
                     If mPokemon.Delete(dexID) Then
-                        teamadapter.Insert(dexID, name, type, ability, move1, move2, move3, move4)
+                        teamadapter.Insert(dexID, name, typeid, ability, move1, move2, move3, move4)
                         dgvPickPokemon.DataSource = mPokemon.Items
                     End If
                 End If
@@ -65,5 +65,13 @@ Public Class PickPokemonForm
         Else
             MessageBox.Show("Please select a pokemon to edit")
         End If
+    End Sub
+    Private Sub cboType_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cboType.SelectedIndexChanged
+        Dim typeid As Short = CShort(cboType.SelectedValue)
+        dgvPickPokemon.DataSource = mPokemon.GetByType(typeid)
+    End Sub
+
+    Private Sub btnSearchAll_Click(sender As Object, e As EventArgs) Handles btnSearchAll.Click
+        dgvPickPokemon.DataSource = mPokemon.Items
     End Sub
 End Class
