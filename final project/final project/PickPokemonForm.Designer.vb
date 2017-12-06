@@ -39,6 +39,7 @@ Partial Class PickPokemonForm
         Me.btnAddPokemon = New System.Windows.Forms.Button()
         Me.btnNEWPKMNINSTANCE = New System.Windows.Forms.Button()
         Me.btnViewTeam = New System.Windows.Forms.Button()
+        Me.btnUpdate = New System.Windows.Forms.Button()
         CType(Me.dgvPickPokemon, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PokemonBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PokemonDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -61,7 +62,7 @@ Partial Class PickPokemonForm
         Me.dgvPickPokemon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvPickPokemon.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn, Me.NameDataGridViewTextBoxColumn, Me.TypingDataGridViewTextBoxColumn, Me.AbilityDataGridViewTextBoxColumn, Me.Move1DataGridViewTextBoxColumn, Me.Move2DataGridViewTextBoxColumn, Me.Move3DataGridViewTextBoxColumn, Me.Move4DataGridViewTextBoxColumn})
         Me.dgvPickPokemon.DataSource = Me.PokemonBindingSource
-        Me.dgvPickPokemon.Location = New System.Drawing.Point(3, -1)
+        Me.dgvPickPokemon.Location = New System.Drawing.Point(-1, -1)
         Me.dgvPickPokemon.Name = "dgvPickPokemon"
         Me.dgvPickPokemon.ReadOnly = True
         Me.dgvPickPokemon.RowTemplate.Height = 24
@@ -165,11 +166,21 @@ Partial Class PickPokemonForm
         Me.btnViewTeam.Text = "view team"
         Me.btnViewTeam.UseVisualStyleBackColor = True
         '
+        'btnUpdate
+        '
+        Me.btnUpdate.Location = New System.Drawing.Point(45, 440)
+        Me.btnUpdate.Name = "btnUpdate"
+        Me.btnUpdate.Size = New System.Drawing.Size(132, 28)
+        Me.btnUpdate.TabIndex = 7
+        Me.btnUpdate.Text = "update Pokemon"
+        Me.btnUpdate.UseVisualStyleBackColor = True
+        '
         'PickPokemonForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(744, 445)
+        Me.ClientSize = New System.Drawing.Size(741, 507)
+        Me.Controls.Add(Me.btnUpdate)
         Me.Controls.Add(Me.btnViewTeam)
         Me.Controls.Add(Me.btnNEWPKMNINSTANCE)
         Me.Controls.Add(Me.btnAddPokemon)
@@ -199,4 +210,5 @@ Partial Class PickPokemonForm
     Friend WithEvents btnAddPokemon As Button
     Friend WithEvents btnNEWPKMNINSTANCE As Button
     Friend WithEvents btnViewTeam As Button
+    Friend WithEvents btnUpdate As Button
 End Class

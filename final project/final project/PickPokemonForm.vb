@@ -54,4 +54,16 @@ Public Class PickPokemonForm
         ViewTeamForm.ShowDialog()
         Me.Close()
     End Sub
+
+    Private Sub btnUpdate_Click(sender As Object, e As EventArgs) Handles btnUpdate.Click
+        If dgvPickPokemon.SelectedRows.Count > 0 Then
+            Dim mID As Integer = CInt(dgvPickPokemon.SelectedRows(0).Cells(0).Value)
+            Dim frm As New updatepokemon
+            frm.id = mID
+            frm.ShowDialog()
+            dgvPickPokemon.DataSource = mPokemon.Items
+        Else
+            MessageBox.Show("Please select a pokemon to edit")
+        End If
+    End Sub
 End Class

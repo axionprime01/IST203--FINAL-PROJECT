@@ -130,6 +130,12 @@
       <DependentUpon>PokemonDataSet.xsd</DependentUpon>
     </Compile>
     <Compile Include="team.vb" />
+    <Compile Include="updatepokemon.Designer.vb">
+      <DependentUpon>updatepokemon.vb</DependentUpon>
+    </Compile>
+    <Compile Include="updatepokemon.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ViewTeamForm.Designer.vb">
       <DependentUpon>ViewTeamForm.vb</DependentUpon>
     </Compile>
@@ -152,6 +158,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="PickPokemonForm.resx">
       <DependentUpon>PickPokemonForm.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="updatepokemon.resx">
+      <DependentUpon>updatepokemon.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ViewTeamForm.resx">
       <DependentUpon>ViewTeamForm.vb</DependentUpon>

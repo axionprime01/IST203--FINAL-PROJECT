@@ -54,4 +54,9 @@ Public Class Pokemon
         Dim rowsAffected As Integer = adapter.Delete(pID)
         Return rowsAffected > 0
     End Function
+    Public Function FindByID(ByVal Id As Short) As PokemonDataSet.PokemonRow
+        Dim table As PokemonDataSet.PokemonDataTable
+        table = adapter.GetData()
+        Return table.FindByID(Id)
+    End Function
 End Class
