@@ -64,4 +64,12 @@ Public Class Pokemon
         table.DefaultView.RowFilter = "TypeId = " & TypeId
         Return table
     End Function
+    Public Function checkId(ByVal id As Integer) As Boolean
+        Dim idisreal As Boolean = True
+        Dim count As Integer = CInt(adapter.checkID(id))
+        If count <> 1 Then
+            idisreal = False
+        End If
+        Return idisreal
+    End Function
 End Class

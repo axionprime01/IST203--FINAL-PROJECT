@@ -204,7 +204,7 @@ Partial Class addpokemon
         Me.StatusStrip1.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.StatusStrip1.Location = New System.Drawing.Point(0, 332)
         Me.StatusStrip1.Name = "StatusStrip1"
-        Me.StatusStrip1.Size = New System.Drawing.Size(345, 22)
+        Me.StatusStrip1.Size = New System.Drawing.Size(622, 22)
         Me.StatusStrip1.TabIndex = 19
         Me.StatusStrip1.Text = "StatusStrip1"
         '
@@ -212,7 +212,7 @@ Partial Class addpokemon
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(345, 354)
+        Me.ClientSize = New System.Drawing.Size(622, 354)
         Me.Controls.Add(Me.StatusStrip1)
         Me.Controls.Add(Me.txtMove4)
         Me.Controls.Add(Me.txtName)
