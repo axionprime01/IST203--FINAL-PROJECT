@@ -26,6 +26,27 @@ Public Class updatepokemon
         Dim move2 As String = txtMove2.Text
         Dim move3 As String = txtMove3.Text
         Dim move4 As String = txtMove4.Text
+        If IsNumeric(ability) = True Then
+            MessageBox.Show("please enter a proper non-numeric entry for your ability and moves")
+            Return
+        End If
+        If IsNumeric(move1) = True Then
+            MessageBox.Show("please enter a proper non-numeric entry for your ability and moves")
+            Return
+        End If
+        If IsNumeric(move2) = True Then
+            MessageBox.Show("please enter a proper non-numeric entry for your ability and moves")
+            Return
+        End If
+        If IsNumeric(move3) = True Then
+            MessageBox.Show("please enter a proper non-numeric entry for your ability and moves")
+            Return
+        End If
+        If IsNumeric(move4) = True Then
+            MessageBox.Show("please enter a proper non-numeric entry for your ability and moves")
+            Return
+        End If
+
         If mPokemon.Update(id, ability, move1, move2, move3, move4) Then
             Me.Close()
         Else

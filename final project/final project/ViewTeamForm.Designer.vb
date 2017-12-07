@@ -35,6 +35,7 @@ Partial Class ViewTeamForm
         Me.TeamBindingSource = New System.Windows.Forms.BindingSource(Me.components)
         Me.PokemonDataSet = New final_project.PokemonDataSet()
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip()
+        Me.tsbtnShowTeam = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbtnDeletePokemon = New System.Windows.Forms.ToolStripButton()
         Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator()
@@ -44,7 +45,7 @@ Partial Class ViewTeamForm
         Me.ToolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator()
         Me.tsbtnCancel = New System.Windows.Forms.ToolStripButton()
         Me.TeamTableAdapter = New final_project.PokemonDataSetTableAdapters.teamTableAdapter()
-        Me.tsbtnShowTeam = New System.Windows.Forms.ToolStripButton()
+        Me.Label1 = New System.Windows.Forms.Label()
         CType(Me.dgvteam, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TeamBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.PokemonDataSet, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -57,7 +58,7 @@ Partial Class ViewTeamForm
         Me.dgvteam.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.dgvteam.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.IDDataGridViewTextBoxColumn, Me.NameDataGridViewTextBoxColumn, Me.AbilityDataGridViewTextBoxColumn, Me.Move1DataGridViewTextBoxColumn, Me.Move2DataGridViewTextBoxColumn, Me.Move3DataGridViewTextBoxColumn, Me.Move4DataGridViewTextBoxColumn})
         Me.dgvteam.DataSource = Me.TeamBindingSource
-        Me.dgvteam.Location = New System.Drawing.Point(12, 42)
+        Me.dgvteam.Location = New System.Drawing.Point(12, 73)
         Me.dgvteam.Name = "dgvteam"
         Me.dgvteam.RowTemplate.Height = 24
         Me.dgvteam.Size = New System.Drawing.Size(585, 365)
@@ -125,6 +126,15 @@ Partial Class ViewTeamForm
         Me.ToolStrip1.TabIndex = 2
         Me.ToolStrip1.Text = "ToolStrip1"
         '
+        'tsbtnShowTeam
+        '
+        Me.tsbtnShowTeam.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.tsbtnShowTeam.Image = CType(resources.GetObject("tsbtnShowTeam.Image"), System.Drawing.Image)
+        Me.tsbtnShowTeam.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.tsbtnShowTeam.Name = "tsbtnShowTeam"
+        Me.tsbtnShowTeam.Size = New System.Drawing.Size(85, 24)
+        Me.tsbtnShowTeam.Text = "show team"
+        '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
@@ -186,20 +196,21 @@ Partial Class ViewTeamForm
         '
         Me.TeamTableAdapter.ClearBeforeFill = True
         '
-        'tsbtnShowTeam
+        'Label1
         '
-        Me.tsbtnShowTeam.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
-        Me.tsbtnShowTeam.Image = CType(resources.GetObject("tsbtnShowTeam.Image"), System.Drawing.Image)
-        Me.tsbtnShowTeam.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.tsbtnShowTeam.Name = "tsbtnShowTeam"
-        Me.tsbtnShowTeam.Size = New System.Drawing.Size(85, 24)
-        Me.tsbtnShowTeam.Text = "show team"
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(12, 38)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(347, 17)
+        Me.Label1.TabIndex = 3
+        Me.Label1.Text = "if you team does not show up at first click ""show team"""
         '
         'ViewTeamForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(609, 419)
+        Me.ClientSize = New System.Drawing.Size(609, 442)
+        Me.Controls.Add(Me.Label1)
         Me.Controls.Add(Me.ToolStrip1)
         Me.Controls.Add(Me.dgvteam)
         Me.Name = "ViewTeamForm"
@@ -236,4 +247,5 @@ Partial Class ViewTeamForm
     Friend WithEvents Move3DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents Move4DataGridViewTextBoxColumn As DataGridViewTextBoxColumn
     Friend WithEvents tsbtnShowTeam As ToolStripButton
+    Friend WithEvents Label1 As Label
 End Class
