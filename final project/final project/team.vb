@@ -1,5 +1,7 @@
 ﻿Public Class team
+    'created adapter to work with database
     Private adapter As New PokemonDataSetTableAdapters.teamTableAdapter
+    'get info method
     Public ReadOnly Property teamlist As DataTable
         Get
             Dim listAdapter As New PokemonDataSetTableAdapters.teamTableAdapter
@@ -7,6 +9,7 @@
         End Get
     End Property
     Public Shared Property LastError As String
+    'insert method
     Public Function Insert(ByVal pID As Integer,
                            ByVal pName As String,
                            ByVal pTypeid As Integer,
@@ -26,15 +29,18 @@
             Return False
         End Try
     End Function
+    'get more info method
     Public ReadOnly Property Items() As DataTable
         Get
             Return adapter.GetData()
         End Get
     End Property
+    'delete function
     Public Function Delete(ByVal pID As Integer) As Boolean
         Dim rowsAffected As Integer = adapter.Delete(pID)
         Return rowsAffected > 0
     End Function
+    'function to delete team
     Public Sub deleteteam(ByVal ids As List(Of Integer))
         'loop through array using above delete method
         For Each id In ids

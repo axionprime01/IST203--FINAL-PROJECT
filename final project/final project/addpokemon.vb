@@ -1,20 +1,20 @@
 ﻿Option Strict On
 Option Explicit On
 Public Class addpokemon
+    'necessary variable declarations and object instance creations
     Dim apokemon As New Pokemon
-    Private Sub addpokemon_Load(sender As Object, e As EventArgs) Handles MyBase.Load
-
-    End Sub
-
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
+        'closes form
         Me.Close()
     End Sub
 
     Private Sub btnAddPokemon_Click(sender As Object, e As EventArgs) Handles btnAddPokemon.Click
+        'necessary variable declarations
         Dim mID As Integer
-
+        'validate controls
         If Integer.TryParse(txtID.Text, mID) Then
             If apokemon.checkId(mID) = False Then
+                'declare and assign variables
                 Dim mName As String = txtName.Text
                 Dim mtypingid As Integer
                 Dim mAbility As String = txtAbility.Text
@@ -22,7 +22,7 @@ Public Class addpokemon
                 Dim mMove2 As String = txtMove2.Text
                 Dim mMove3 As String = txtMove3.Text
                 Dim mMove4 As String = txtMove4.Text
-
+                'more validation
                 If IsNumeric(mName) = True Or txtName.Text = "" Then
                     MessageBox.Show("please enter a non numberic value for your name")
                     Return
@@ -48,6 +48,7 @@ Public Class addpokemon
                     Return
                 End If
                 If Integer.TryParse(txtTyping.Text, mtypingid) And mtypingid <= 18 Then
+                    'add pokemon to database
                     apokemon.Insert(mID, mName, mtypingid, mAbility, mMove1, mMove2, mMove3, mMove4)
                     MessageBox.Show("successfully added pokemon!")
                     Me.Close()
